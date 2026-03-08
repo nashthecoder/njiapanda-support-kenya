@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Heart, Send, Phone, Filter } from "lucide-react";
+import { ArrowLeft, Heart, Send, Phone, Filter, Search, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -66,6 +66,8 @@ const StoryLibrary = () => {
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
   const [resonated, setResonated] = useState<Set<string>>(new Set());
 
   // Submission form state
@@ -85,10 +87,14 @@ const StoryLibrary = () => {
       query = query.eq("abuse_type", filter);
     }
 
+    if (searchQuery.trim()) {
+      query = query.ilike("text", `%${searchQuery.trim()}%`);
+    }
+
     const { data, error } = await query;
     if (!error && data) setStories(data);
     setLoading(false);
-  }, [filter]);
+  }, [filter, searchQuery]);
 
   useEffect(() => {
     fetchStories();
@@ -165,6 +171,27 @@ const StoryLibrary = () => {
 
       <div className="mx-auto max-w-lg px-4 py-5">
         <p className="mb-4 text-sm text-muted-foreground">{label("subtitle")}</p>
+
+        {/* Search bar */}
+        <div className="mb-4">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <input
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={lang === "en" ? "Search stories…" : "Tafuta hadithi…"}
+              className="w-full rounded-lg border border-input bg-background py-2.5 pl-9 pr-9 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+        </div>
 
         {/* Filter bar */}
         <div className="mb-5 flex gap-2 overflow-x-auto pb-1">

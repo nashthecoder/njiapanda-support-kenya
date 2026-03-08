@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { LogOut, Shield, AlertTriangle, Clock, Sparkles } from "lucide-react";
 import CaseCard from "@/components/dashboard/CaseCard";
 import SafeHousePanel from "@/components/dashboard/SafeHousePanel";
+import { useSignalNotifications } from "@/hooks/useSignalNotifications";
 import type { Tables } from "@/integrations/supabase/types";
 
 type Signal = Tables<"signals">;
@@ -22,6 +23,9 @@ const Dashboard = () => {
   const [cases, setCases] = useState<CaseWithSignal[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"signals" | "cases" | "safehouses">("signals");
+
+  // Real-time notifications for new signals
+  useSignalNotifications(isConductor);
 
   useEffect(() => {
     if (!authLoading && !user) {

@@ -102,7 +102,15 @@ const StoryLibrary = () => {
 
   // Dev-only font debug
   const [showFontDebug, setShowFontDebug] = useState(false);
+  const [computedFont, setComputedFont] = useState<string>("");
+  const fontDebugRef = useRef<HTMLParagraphElement>(null);
   const isDev = import.meta.env.DEV;
+
+  useEffect(() => {
+    if (showFontDebug && fontDebugRef.current) {
+      setComputedFont(getComputedStyle(fontDebugRef.current).fontFamily);
+    }
+  }, [showFontDebug, stories]);
 
   const fetchStories = useCallback(async () => {
     setLoading(true);

@@ -97,7 +97,7 @@ export default function Admin() {
 
       {/* Main content */}
       <main className="flex-1 overflow-y-auto">
-        {tab === "overview" && <AdminOverview onNavigate={setTab} />}
+        {tab === "overview" && <AdminOverview onNavigate={(t) => setTab(t as TabId)} />}
         {tab === "conductors" && <AdminConductors />}
         {tab === "stories" && <AdminStories />}
         {tab === "alerts" && <AdminAlerts />}

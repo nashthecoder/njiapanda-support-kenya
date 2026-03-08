@@ -100,6 +100,10 @@ const StoryLibrary = () => {
   const [text, setText] = useState("");
   const [abuseType, setAbuseType] = useState("");
 
+  // Dev-only font debug
+  const [showFontDebug, setShowFontDebug] = useState(false);
+  const isDev = import.meta.env.DEV;
+
   const fetchStories = useCallback(async () => {
     setLoading(true);
     let query = supabase

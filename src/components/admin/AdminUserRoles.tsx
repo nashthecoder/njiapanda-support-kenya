@@ -82,6 +82,12 @@ export default function AdminUserRoles() {
       setUserRoles((prev) => [...prev, data]);
       setNewRole("");
       toast.success(`Assigned ${newRole} role`);
+      await supabase.from("audit_log" as any).insert({
+        action: "assign_role",
+        entity_type: "role",
+        entity_id: selectedUser.id,
+        details: { role: newRole, user_name: selectedUser.full_name },
+      });
     }
   };
 

@@ -46,6 +46,7 @@ const App = () => (
           <Route path="/contribute" element={<Contribute />} />
           <Route path="/join" element={<JoinNetwork />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/why" element={<WhyNjiapanda />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

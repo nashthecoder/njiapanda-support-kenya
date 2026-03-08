@@ -49,35 +49,20 @@ const WhyNjiapanda = () => {
             className="font-display text-xl sm:text-2xl font-light italic text-forest-dk leading-[1.85] whitespace-pre-line"
           >
 {`Most of the services that GBV survivors need already exist in Kenya.
-
 Shelters. Legal aid. Crisis hotlines. Counselling.
-
 The gap was never the absence of help.
-
 It was the distance between a person and the moment they could reach it.
-
 And before that distance — there is another one.
-
 The moment before you can reach for help is the moment you have to be honest with yourself about what is happening.
-
 That is the hardest moment of all.
-
 Because abuse does not announce itself.
-
 It settles in slowly, quietly, until it starts to feel like your normal.
-
 It is that gut feeling you keep pushing down.
-
 The nervousness you cannot explain.
-
 The discomfort you have learned to move around.
-
 It is hiding a physical mark from your friends.
-
 It is carrying an emotional hurt so deep you have stopped knowing how to name it — even to yourself.
-
 You do not see it until you look into a mirror and decide to be honest about what is looking back.
-
 That moment of recognition — that is where Njiapanda begins.`}
           </p>
         </motion.div>

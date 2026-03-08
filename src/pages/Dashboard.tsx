@@ -238,7 +238,7 @@ export function UrgencyBadge({ urgency }: { urgency: string }) {
   };
   const c = config[urgency] ?? config.medium;
   return (
-    <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${c.bg} ${c.text}`}>
+    <span className={`rounded-full px-2 py-0.5 font-mono text-xs font-semibold ${c.bg} ${c.text}`}>
       {c.label}
     </span>
   );

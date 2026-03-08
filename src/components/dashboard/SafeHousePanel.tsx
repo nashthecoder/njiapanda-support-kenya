@@ -77,7 +77,7 @@ const SafeHousePanel = () => {
               </span>
             </div>
             {h.zone && <p className="font-mono text-xs">Zone: {h.zone}</p>}
-            <p className="mt-1 text-[10px] text-muted-foreground">
+            <p className="mt-1 font-mono text-[10px] text-muted-foreground">
               Updated {new Date(h.updated_at).toLocaleString()}
             </p>
           </div>

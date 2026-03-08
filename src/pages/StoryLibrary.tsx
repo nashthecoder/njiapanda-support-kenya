@@ -80,6 +80,8 @@ type Story = {
   text: string;
   title: string | null;
   swahili_text: string | null;
+  english_simple: string | null;
+  swahili_simple: string | null;
   message: string | null;
   abuse_type: string | null;
   resonance_count: number;

@@ -23,6 +23,7 @@ export type Database = {
           signal_id: string | null
           status: string | null
           updated_at: string
+          zone: string | null
         }
         Insert: {
           conductor_id?: string | null
@@ -32,6 +33,7 @@ export type Database = {
           signal_id?: string | null
           status?: string | null
           updated_at?: string
+          zone?: string | null
         }
         Update: {
           conductor_id?: string | null
@@ -41,6 +43,7 @@ export type Database = {
           signal_id?: string | null
           status?: string | null
           updated_at?: string
+          zone?: string | null
         }
         Relationships: [
           {
@@ -275,6 +278,7 @@ export type Database = {
     }
     Functions: {
       get_conductor_zone: { Args: { _user_id: string }; Returns: string }
+      get_my_conductor_zone: { Args: never; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

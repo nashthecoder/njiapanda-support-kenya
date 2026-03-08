@@ -76,7 +76,7 @@ const SafeHousePanel = () => {
                 {h.capacity_status ?? "available"}
               </span>
             </div>
-            {h.zone && <p className="text-xs">Zone: {h.zone}</p>}
+            {h.zone && <p className="font-mono text-xs">Zone: {h.zone}</p>}
             <p className="mt-1 text-[10px] text-muted-foreground">
               Updated {new Date(h.updated_at).toLocaleString()}
             </p>

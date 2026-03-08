@@ -224,7 +224,7 @@ const StoryLibrary = () => {
             <button
               key={type}
               onClick={() => setFilter(type)}
-              className={`shrink-0 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+              className={`shrink-0 rounded-full border px-3 py-1.5 font-mono text-xs font-medium transition-colors ${
                 filter === type
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-border bg-card text-muted-foreground"

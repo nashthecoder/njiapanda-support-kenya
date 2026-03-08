@@ -82,6 +82,12 @@ export default function AdminUserRoles() {
       setUserRoles((prev) => [...prev, data]);
       setNewRole("");
       toast.success(`Assigned ${newRole} role`);
+      await supabase.from("audit_log" as any).insert({
+        action: "assign_role",
+        entity_type: "role",
+        entity_id: selectedUser.id,
+        details: { role: newRole, user_name: selectedUser.full_name },
+      });
     }
   };
 
@@ -92,6 +98,12 @@ export default function AdminUserRoles() {
     } else {
       setUserRoles((prev) => prev.filter((r) => r.id !== roleRow.id));
       toast.success(`Removed ${roleRow.role} role`);
+      await supabase.from("audit_log" as any).insert({
+        action: "remove_role",
+        entity_type: "role",
+        entity_id: roleRow.user_id,
+        details: { role: roleRow.role },
+      });
     }
   };
 

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useAccessibility } from "@/hooks/useAccessibility";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Heart, Send, Phone, Filter, Search, X } from "lucide-react";
@@ -79,6 +80,8 @@ type Story = {
   text: string;
   title: string | null;
   swahili_text: string | null;
+  english_simple: string | null;
+  swahili_simple: string | null;
   message: string | null;
   abuse_type: string | null;
   resonance_count: number;
@@ -86,6 +89,7 @@ type Story = {
 };
 
 const StoryLibrary = () => {
+  const { simpleLanguage } = useAccessibility();
   const navigate = useNavigate();
   const [lang, setLang] = useState<Lang>("en");
   const [stories, setStories] = useState<Story[]>([]);
@@ -116,7 +120,7 @@ const StoryLibrary = () => {
     setLoading(true);
     let query = supabase
       .from("stories")
-      .select("id, text, title, swahili_text, message, abuse_type, resonance_count, created_at")
+      .select("id, text, title, swahili_text, english_simple, swahili_simple, message, abuse_type, resonance_count, created_at")
       .eq("status", "approved")
       .order("created_at", { ascending: false });
 
@@ -301,8 +305,18 @@ const StoryLibrary = () => {
                     ref={i === 0 ? fontDebugRef : undefined}
                     className="story-body mb-3 text-sm leading-relaxed text-card-foreground [font-family:var(--font-serif)]"
                   >
-                    {lang === "sw" && story.swahili_text ? story.swahili_text : story.text}
+                    {(() => {
+                      if (lang === "sw") {
+                        return (simpleLanguage && story.swahili_simple) ? story.swahili_simple : (story.swahili_text || story.text);
+                      }
+                      return (simpleLanguage && story.english_simple) ? story.english_simple : story.text;
+                    })()}
                   </p>
+                  {simpleLanguage && (
+                    <p className="mb-2 text-[10px] text-muted-foreground italic">
+                      Showing simplified language
+                    </p>
+                  )}
                   {showFontDebug && i === 0 && (
                     <div className="mb-2 rounded bg-muted/60 px-2 py-1 font-mono text-[9px] text-muted-foreground">
                       font-family:{" "}

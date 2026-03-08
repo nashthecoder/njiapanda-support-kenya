@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      audit_log: {
+        Row: {
+          action: string
+          actor_id: string | null
+          created_at: string
+          details: Json | null
+          entity_id: string | null
+          entity_type: string
+          id: string
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json | null
+          entity_id?: string | null
+          entity_type: string
+          id?: string
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json | null
+          entity_id?: string | null
+          entity_type?: string
+          id?: string
+        }
+        Relationships: []
+      }
       cases: {
         Row: {
           conductor_id: string | null
@@ -315,12 +345,14 @@ export type Database = {
         Row: {
           abuse_type: string | null
           created_at: string
+          english_simple: string | null
           id: string
           language: string | null
           message: string | null
           resonance_count: number
           source: string | null
           status: string | null
+          swahili_simple: string | null
           swahili_text: string | null
           tags: string[] | null
           text: string
@@ -329,12 +361,14 @@ export type Database = {
         Insert: {
           abuse_type?: string | null
           created_at?: string
+          english_simple?: string | null
           id?: string
           language?: string | null
           message?: string | null
           resonance_count?: number
           source?: string | null
           status?: string | null
+          swahili_simple?: string | null
           swahili_text?: string | null
           tags?: string[] | null
           text: string
@@ -343,12 +377,14 @@ export type Database = {
         Update: {
           abuse_type?: string | null
           created_at?: string
+          english_simple?: string | null
           id?: string
           language?: string | null
           message?: string | null
           resonance_count?: number
           source?: string | null
           status?: string | null
+          swahili_simple?: string | null
           swahili_text?: string | null
           tags?: string[] | null
           text?: string

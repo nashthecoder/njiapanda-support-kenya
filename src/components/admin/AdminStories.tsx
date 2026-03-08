@@ -45,6 +45,12 @@ export default function AdminStories() {
     const update: any = { status: "approved" };
     if (text) update.text = text;
     await supabase.from("stories").update(update).eq("id", id);
+    await supabase.from("audit_log" as any).insert({
+      action: "approve",
+      entity_type: "story",
+      entity_id: id,
+      details: text ? { edited: true } : {},
+    });
     setStories((prev) => prev.filter((s) => s.id !== id));
     setEditingId(null);
     toast.success("Story approved");
@@ -52,6 +58,12 @@ export default function AdminStories() {
 
   const reject = async (id: string) => {
     await supabase.from("stories").update({ status: "rejected" }).eq("id", id);
+    await supabase.from("audit_log" as any).insert({
+      action: "reject",
+      entity_type: "story",
+      entity_id: id,
+      details: rejectReason ? { reason: rejectReason } : {},
+    });
     setStories((prev) => prev.filter((s) => s.id !== id));
     setRejectId(null);
     setRejectReason("");

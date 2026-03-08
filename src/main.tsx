@@ -20,9 +20,6 @@ import "@fontsource/dm-mono/500.css";
 import App from "./App.tsx";
 import "./index.css";
 
-// Register service worker for offline safety plan
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js").catch(() => {});
-}
+// PWA service worker is now managed by vite-plugin-pwa
 
 createRoot(document.getElementById("root")!).render(<App />);

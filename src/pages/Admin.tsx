@@ -17,6 +17,7 @@ import AdminStoryCMS from "@/components/admin/AdminStoryCMS";
 import AdminResources from "@/components/admin/AdminResources";
 import AdminSafeHouses from "@/components/admin/AdminSafeHouses";
 import AdminSignals from "@/components/admin/AdminSignals";
+import AdminAuditLog from "@/components/admin/AdminAuditLog";
 
 const NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: BarChart3, ready: true },
@@ -30,7 +31,7 @@ const NAV_ITEMS = [
   { id: "resources", label: "Resources", icon: MapPin, ready: true },
   { id: "safehouses", label: "Safe Houses", icon: Home, ready: true },
   { id: "alerts", label: "Alerts", icon: Bell, ready: true },
-  { id: "audit", label: "Audit Log", icon: ClipboardList, ready: false },
+  { id: "audit", label: "Audit Log", icon: ClipboardList, ready: true },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
@@ -119,11 +120,7 @@ export default function Admin() {
         {tab === "resources" && <AdminResources />}
         {tab === "safehouses" && <AdminSafeHouses />}
         {tab === "alerts" && <AdminAlerts />}
-        {tab === "audit" && (
-          <div className="flex h-full items-center justify-center">
-            <p className="text-muted-foreground">Audit Log — coming soon.</p>
-          </div>
-        )}
+        {tab === "audit" && <AdminAuditLog />}
       </main>
     </div>
   );

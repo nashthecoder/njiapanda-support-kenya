@@ -11,6 +11,7 @@ import AdminConductors from "@/components/admin/AdminConductors";
 import AdminStories from "@/components/admin/AdminStories";
 import AdminAlerts from "@/components/admin/AdminAlerts";
 import AdminFeedback from "@/components/admin/AdminFeedback";
+import AdminPartners from "@/components/admin/AdminPartners";
 
 const NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: BarChart3, ready: true },

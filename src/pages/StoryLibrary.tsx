@@ -344,7 +344,7 @@ const StoryLibrary = () => {
                           : "border-border bg-background text-muted-foreground"
                       }`}
                     >
-                      {lang === "sw" ? abuseTypesSw[tp] || tp : tp}
+                      {lang === "sw" ? abuseTypeLabels[tp]?.sw || tp : abuseTypeLabels[tp]?.en || tp}
                     </button>
                   ))}
                 </div>

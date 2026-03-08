@@ -20,16 +20,22 @@ const ShareStory = () => {
       toast.error("Please share your story before submitting.");
       return;
     }
-    const { error } = await supabase.from("stories").insert({
+    const { data, error } = await supabase.from("stories").insert({
       text,
       abuse_type: abuseType || null,
       language,
       status: "pending",
       source: "app",
-    });
+    }).select("id").single();
     if (error) {
       toast.error("Something went wrong. Please try again.");
       return;
+    }
+    // Trigger moderation in background
+    if (data?.id) {
+      supabase.functions.invoke("moderate-story", {
+        body: { story_id: data.id, text },
+      });
     }
     toast.success("Your story has been received. You are brave. 💚");
     setText("");

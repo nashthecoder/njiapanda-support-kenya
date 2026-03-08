@@ -8,3 +8,15 @@ verify_jwt = false
 
 [functions.stripe-webhook]
 verify_jwt = false
+
+[functions.transcribe-audio]
+verify_jwt = false
+
+[functions.forward-signal]
+verify_jwt = false
+
+[functions.moderate-story]
+verify_jwt = false
+
+[functions.notify-feedback]
+verify_jwt = false

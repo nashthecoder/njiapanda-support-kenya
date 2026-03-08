@@ -17,6 +17,7 @@ import AdminStoryCMS from "@/components/admin/AdminStoryCMS";
 import AdminResources from "@/components/admin/AdminResources";
 import AdminSafeHouses from "@/components/admin/AdminSafeHouses";
 import AdminSignals from "@/components/admin/AdminSignals";
+import AdminAuditLog from "@/components/admin/AdminAuditLog";
 
 const NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: BarChart3, ready: true },
@@ -30,7 +31,7 @@ const NAV_ITEMS = [
   { id: "resources", label: "Resources", icon: MapPin, ready: true },
   { id: "safehouses", label: "Safe Houses", icon: Home, ready: true },
   { id: "alerts", label: "Alerts", icon: Bell, ready: true },
-  { id: "audit", label: "Audit Log", icon: ClipboardList, ready: false },
+  { id: "audit", label: "Audit Log", icon: ClipboardList, ready: true },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];

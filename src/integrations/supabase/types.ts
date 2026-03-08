@@ -14,7 +14,186 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      cases: {
+        Row: {
+          conductor_id: string | null
+          id: string
+          notes: string | null
+          risk_level: string | null
+          signal_id: string | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          conductor_id?: string | null
+          id?: string
+          notes?: string | null
+          risk_level?: string | null
+          signal_id?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          conductor_id?: string | null
+          id?: string
+          notes?: string | null
+          risk_level?: string | null
+          signal_id?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cases_conductor_id_fkey"
+            columns: ["conductor_id"]
+            isOneToOne: false
+            referencedRelation: "conductors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cases_signal_id_fkey"
+            columns: ["signal_id"]
+            isOneToOne: false
+            referencedRelation: "signals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      conductors: {
+        Row: {
+          active: boolean | null
+          id: string
+          name: string
+          role: string | null
+          zone: string | null
+        }
+        Insert: {
+          active?: boolean | null
+          id?: string
+          name: string
+          role?: string | null
+          zone?: string | null
+        }
+        Update: {
+          active?: boolean | null
+          id?: string
+          name?: string
+          role?: string | null
+          zone?: string | null
+        }
+        Relationships: []
+      }
+      resources: {
+        Row: {
+          contact: string | null
+          hours: string | null
+          id: string
+          name: string
+          type: string | null
+          verified: boolean | null
+          zone: string | null
+        }
+        Insert: {
+          contact?: string | null
+          hours?: string | null
+          id?: string
+          name: string
+          type?: string | null
+          verified?: boolean | null
+          zone?: string | null
+        }
+        Update: {
+          contact?: string | null
+          hours?: string | null
+          id?: string
+          name?: string
+          type?: string | null
+          verified?: boolean | null
+          zone?: string | null
+        }
+        Relationships: []
+      }
+      safe_houses: {
+        Row: {
+          capacity_status: string | null
+          id: string
+          type: string | null
+          updated_at: string
+          zone: string | null
+        }
+        Insert: {
+          capacity_status?: string | null
+          id?: string
+          type?: string | null
+          updated_at?: string
+          zone?: string | null
+        }
+        Update: {
+          capacity_status?: string | null
+          id?: string
+          type?: string | null
+          updated_at?: string
+          zone?: string | null
+        }
+        Relationships: []
+      }
+      signals: {
+        Row: {
+          consent: boolean | null
+          created_at: string
+          id: string
+          resource_needed: string | null
+          urgency: string
+          zone: string | null
+        }
+        Insert: {
+          consent?: boolean | null
+          created_at?: string
+          id?: string
+          resource_needed?: string | null
+          urgency?: string
+          zone?: string | null
+        }
+        Update: {
+          consent?: boolean | null
+          created_at?: string
+          id?: string
+          resource_needed?: string | null
+          urgency?: string
+          zone?: string | null
+        }
+        Relationships: []
+      }
+      stories: {
+        Row: {
+          abuse_type: string | null
+          created_at: string
+          id: string
+          language: string | null
+          source: string | null
+          status: string | null
+          text: string
+        }
+        Insert: {
+          abuse_type?: string | null
+          created_at?: string
+          id?: string
+          language?: string | null
+          source?: string | null
+          status?: string | null
+          text: string
+        }
+        Update: {
+          abuse_type?: string | null
+          created_at?: string
+          id?: string
+          language?: string | null
+          source?: string | null
+          status?: string | null
+          text?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -190,12 +190,23 @@ const StoryLibrary = () => {
             {label("title")}
           </h1>
         </div>
-        <button
-          onClick={() => setLang(lang === "en" ? "sw" : "en")}
-          className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground transition-colors"
-        >
-          {lang === "en" ? "SW" : "EN"}
-        </button>
+        <div className="flex items-center gap-2">
+          {isDev && (
+            <button
+              onClick={() => setShowFontDebug(!showFontDebug)}
+              className="rounded border border-dashed border-muted-foreground/30 px-2 py-0.5 font-mono text-[10px] text-muted-foreground hover:bg-muted"
+              title="Toggle font debug"
+            >
+              🔤
+            </button>
+          )}
+          <button
+            onClick={() => setLang(lang === "en" ? "sw" : "en")}
+            className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground transition-colors"
+          >
+            {lang === "en" ? "SW" : "EN"}
+          </button>
+        </div>
       </header>
 
       <div className="mx-auto max-w-lg px-4 py-5">

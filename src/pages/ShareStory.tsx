@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Send } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const abuseTypes = ["Physical", "Sexual", "Emotional", "Economic", "Other"];
 const languages = ["English", "Kiswahili", "Sheng"];
@@ -13,13 +14,23 @@ const ShareStory = () => {
   const [abuseType, setAbuseType] = useState("");
   const [language, setLanguage] = useState("English");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!text.trim()) {
       toast.error("Please share your story before submitting.");
       return;
     }
-    // TODO: Save to Supabase stories table
+    const { error } = await supabase.from("stories").insert({
+      text,
+      abuse_type: abuseType || null,
+      language,
+      status: "pending",
+      source: "app",
+    });
+    if (error) {
+      toast.error("Something went wrong. Please try again.");
+      return;
+    }
     toast.success("Your story has been received. You are brave. 💚");
     setText("");
     setAbuseType("");

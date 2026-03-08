@@ -89,6 +89,7 @@ type Story = {
 };
 
 const StoryLibrary = () => {
+  const { simpleLanguage } = useAccessibility();
   const navigate = useNavigate();
   const [lang, setLang] = useState<Lang>("en");
   const [stories, setStories] = useState<Story[]>([]);

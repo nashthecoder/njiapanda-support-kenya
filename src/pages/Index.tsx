@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Shield, MessageCircle, Phone, MapPin } from "lucide-react";
-import logoMark from "@/assets/njiapanda_logo_mark.png";
 import heroImage from "@/assets/njiapanda_hero.png";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";

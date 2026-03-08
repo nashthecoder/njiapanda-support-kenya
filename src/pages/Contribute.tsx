@@ -159,7 +159,7 @@ export default function Contribute() {
             transition={{ duration: 0.6 }}
           >
             <Shield className="mx-auto mb-4 h-12 w-12 opacity-80" />
-            <h1 className="font-serif text-3xl font-bold tracking-tight sm:text-4xl">
+            <h1 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
               Stand With Survivors
             </h1>
             <p className="mt-4 text-lg leading-relaxed opacity-90">
@@ -227,7 +227,7 @@ export default function Contribute() {
                       <tier.icon className="h-6 w-6" />
                     </div>
                     <div>
-                      <CardTitle className="text-lg font-serif">{tier.title}</CardTitle>
+                      <CardTitle className="text-lg font-display">{tier.title}</CardTitle>
                       <p className="mt-0.5 font-mono text-xl font-bold text-foreground">
                         {tier.amount}
                       </p>

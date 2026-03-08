@@ -9,6 +9,7 @@ import StoryLibrary from "./pages/StoryLibrary";
 import Safety from "./pages/Safety";
 import Resources from "./pages/Resources";
 import Helpline from "./pages/Helpline";
+import QuietSignal from "./pages/QuietSignal";
 import NotFound from "./pages/NotFound";
 import EmergencyExitButton from "./components/EmergencyExitButton";
 import BottomNav from "./components/BottomNav";
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/safety" element={<Safety />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/helpline" element={<Helpline />} />
+          <Route path="/signal" element={<QuietSignal />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <BottomNav />

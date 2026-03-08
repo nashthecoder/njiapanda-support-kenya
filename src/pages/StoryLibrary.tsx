@@ -120,7 +120,7 @@ const StoryLibrary = () => {
     setLoading(true);
     let query = supabase
       .from("stories")
-      .select("id, text, title, swahili_text, message, abuse_type, resonance_count, created_at")
+      .select("id, text, title, swahili_text, english_simple, swahili_simple, message, abuse_type, resonance_count, created_at")
       .eq("status", "approved")
       .order("created_at", { ascending: false });
 

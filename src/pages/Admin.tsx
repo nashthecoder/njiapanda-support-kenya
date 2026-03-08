@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import {
   BarChart3, Users, BookOpen, Shield, MapPin, Home, Bell, ClipboardList,
-  LogOut, Radio,
+  LogOut, Radio, MessageSquarePlus,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminOverview from "@/components/admin/AdminOverview";
 import AdminConductors from "@/components/admin/AdminConductors";
 import AdminStories from "@/components/admin/AdminStories";
 import AdminAlerts from "@/components/admin/AdminAlerts";
+import AdminFeedback from "@/components/admin/AdminFeedback";
 
 const NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: BarChart3, ready: true },

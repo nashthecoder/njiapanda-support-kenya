@@ -16,6 +16,7 @@ import Dashboard from "./pages/Dashboard";
 import Contribute from "./pages/Contribute";
 import JoinNetwork from "./pages/JoinNetwork";
 import Admin from "./pages/Admin";
+import AdminLogin from "./pages/AdminLogin";
 import WhyNjiapanda from "./pages/WhyNjiapanda";
 import NotFound from "./pages/NotFound";
 import EmergencyExitButton from "./components/EmergencyExitButton";

@@ -146,7 +146,7 @@ const Dashboard = () => {
               <Icon className="h-4 w-4" />
               {label}
               {count !== null && count > 0 && (
-                <span className="rounded-full bg-emergency/10 px-2 py-0.5 text-xs font-semibold text-emergency">
+                <span className="rounded-full bg-emergency/10 px-2 py-0.5 font-mono text-xs font-semibold text-emergency">
                   {count}
                 </span>
               )}

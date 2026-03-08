@@ -2,11 +2,11 @@ import { X } from "lucide-react";
 
 const EmergencyExitButton = () => {
   const handleExit = () => {
-    // Clear session storage and local storage
+    // Clear all client-side storage
     sessionStorage.clear();
     localStorage.clear();
-    // Navigate to a neutral page
-    window.location.replace("https://www.google.com");
+    // Replace history entry so back button won't return here
+    window.location.replace("https://weather.com");
   };
 
   return (

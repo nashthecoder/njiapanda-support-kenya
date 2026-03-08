@@ -15,8 +15,9 @@ export default {
     extend: {
       fontFamily: {
         display: ["Crimson Pro", "Georgia", "serif"],
-        body: ["IBM Plex Serif", "Georgia", "serif"],
+        body: ["DM Sans", "system-ui", "sans-serif"],
         mono: ["DM Mono", "Courier New", "monospace"],
+        serif: ["IBM Plex Serif", "Georgia", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",

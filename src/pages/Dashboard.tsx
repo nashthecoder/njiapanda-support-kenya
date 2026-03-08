@@ -146,7 +146,7 @@ const Dashboard = () => {
               <Icon className="h-4 w-4" />
               {label}
               {count !== null && count > 0 && (
-                <span className="rounded-full bg-emergency/10 px-2 py-0.5 text-xs font-semibold text-emergency">
+                <span className="rounded-full bg-emergency/10 px-2 py-0.5 font-mono text-xs font-semibold text-emergency">
                   {count}
                 </span>
               )}
@@ -175,18 +175,18 @@ const Dashboard = () => {
                       <div className="mb-2 flex flex-wrap items-center gap-2">
                         <UrgencyBadge urgency={signal.urgency} />
                         {signal.zone && (
-                          <span className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
+                          <span className="rounded-full bg-secondary px-2 py-0.5 font-mono text-xs text-secondary-foreground">
                             {signal.zone}
                           </span>
                         )}
-                        <span className="text-xs text-muted-foreground">
+                        <span className="font-mono text-xs text-muted-foreground">
                           {timeAgo(signal.created_at)}
                         </span>
                       </div>
                       {signal.resource_needed && (
                         <div className="mb-2 flex flex-wrap gap-1">
                           {signal.resource_needed.split(", ").map((r) => (
-                            <span key={r} className="rounded bg-accent px-2 py-0.5 text-xs text-accent-foreground">
+                            <span key={r} className="rounded bg-accent px-2 py-0.5 font-mono text-xs text-accent-foreground">
                               {r}
                             </span>
                           ))}
@@ -238,7 +238,7 @@ export function UrgencyBadge({ urgency }: { urgency: string }) {
   };
   const c = config[urgency] ?? config.medium;
   return (
-    <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${c.bg} ${c.text}`}>
+    <span className={`rounded-full px-2 py-0.5 font-mono text-xs font-semibold ${c.bg} ${c.text}`}>
       {c.label}
     </span>
   );

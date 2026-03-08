@@ -72,12 +72,12 @@ const SafeHousePanel = () => {
           >
             <div className="mb-2 flex items-center justify-between">
               <span className="font-semibold text-foreground">{h.type || "Shelter"}</span>
-              <span className="rounded-full bg-card px-2 py-0.5 text-xs font-medium">
+              <span className="rounded-full bg-card px-2 py-0.5 font-mono text-xs font-medium">
                 {h.capacity_status ?? "available"}
               </span>
             </div>
-            {h.zone && <p className="text-xs">Zone: {h.zone}</p>}
-            <p className="mt-1 text-[10px] text-muted-foreground">
+            {h.zone && <p className="font-mono text-xs">Zone: {h.zone}</p>}
+            <p className="mt-1 font-mono text-[10px] text-muted-foreground">
               Updated {new Date(h.updated_at).toLocaleString()}
             </p>
           </div>

@@ -78,15 +78,15 @@ const CaseCard = ({ caseData, onUpdate }: CaseCardProps) => {
         <div className="flex-1">
           <div className="mb-2 flex flex-wrap items-center gap-2">
             {caseData.signal && <UrgencyBadge urgency={caseData.signal.urgency} />}
-            <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${statusColor[caseData.status ?? "open"]}`}>
+            <span className={`rounded-full px-2 py-0.5 font-mono text-xs font-semibold ${statusColor[caseData.status ?? "open"]}`}>
               {caseData.status?.replace("_", " ") ?? "open"}
             </span>
             {caseData.risk_level && (
-              <span className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
+              <span className="rounded-full bg-secondary px-2 py-0.5 font-mono text-xs text-secondary-foreground">
                 Risk: {caseData.risk_level}
               </span>
             )}
-            <span className="text-xs text-muted-foreground">
+            <span className="font-mono text-xs text-muted-foreground">
               Updated {timeAgo(caseData.updated_at)}
             </span>
           </div>
@@ -95,7 +95,7 @@ const CaseCard = ({ caseData, onUpdate }: CaseCardProps) => {
           {caseData.signal?.resource_needed && (
             <div className="mb-2 flex flex-wrap gap-1">
               {caseData.signal.resource_needed.split(", ").map((r) => (
-                <span key={r} className="rounded bg-accent px-2 py-0.5 text-xs text-accent-foreground">
+                <span key={r} className="rounded bg-accent px-2 py-0.5 font-mono text-xs text-accent-foreground">
                   {r}
                 </span>
               ))}
@@ -103,7 +103,7 @@ const CaseCard = ({ caseData, onUpdate }: CaseCardProps) => {
           )}
 
           {caseData.signal?.zone && (
-            <span className="text-xs text-muted-foreground">Zone: {caseData.signal.zone}</span>
+            <span className="font-mono text-xs text-muted-foreground">Zone: {caseData.signal.zone}</span>
           )}
         </div>
 
@@ -149,32 +149,32 @@ const CaseCard = ({ caseData, onUpdate }: CaseCardProps) => {
         <div className="border-t border-border bg-secondary/30 p-4">
           <h4 className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-foreground">
             <Sparkles className="h-3.5 w-3.5 text-primary" /> AI Risk Assessment
-            <span className="ml-auto text-[10px] font-normal text-muted-foreground">Session only — not stored</span>
+            <span className="ml-auto font-mono text-[10px] font-normal text-muted-foreground">Session only — not stored</span>
           </h4>
           <div className="grid grid-cols-2 gap-3 text-xs">
             <div>
-              <span className="text-muted-foreground">Risk Level</span>
+              <span className="font-mono text-muted-foreground">Risk Level</span>
               <p className="font-semibold text-foreground">{aiBrief.risk_level}</p>
             </div>
             <div>
-              <span className="text-muted-foreground">Safety Concern</span>
+              <span className="font-mono text-muted-foreground">Safety Concern</span>
               <p className={`font-semibold ${aiBrief.immediate_safety_concern ? "text-emergency" : "text-safe"}`}>
                 {aiBrief.immediate_safety_concern ? "⚠ Immediate" : "✓ No immediate danger"}
               </p>
             </div>
             <div>
-              <span className="text-muted-foreground">Detected Types</span>
+              <span className="font-mono text-muted-foreground">Detected Types</span>
               <div className="mt-1 flex flex-wrap gap-1">
                 {aiBrief.detected_abuse_types.map((t) => (
-                  <span key={t} className="rounded bg-emergency/10 px-1.5 py-0.5 text-[11px] text-emergency">{t}</span>
+                  <span key={t} className="rounded bg-emergency/10 px-1.5 py-0.5 font-mono text-[11px] text-emergency">{t}</span>
                 ))}
               </div>
             </div>
             <div>
-              <span className="text-muted-foreground">Suggested Resources</span>
+              <span className="font-mono text-muted-foreground">Suggested Resources</span>
               <div className="mt-1 flex flex-wrap gap-1">
                 {aiBrief.suggested_resources.map((r) => (
-                  <span key={r} className="rounded bg-safe/10 px-1.5 py-0.5 text-[11px] text-safe">{r}</span>
+                  <span key={r} className="rounded bg-safe/10 px-1.5 py-0.5 font-mono text-[11px] text-safe">{r}</span>
                 ))}
               </div>
             </div>

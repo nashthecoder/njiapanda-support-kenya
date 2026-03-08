@@ -224,7 +224,7 @@ const StoryLibrary = () => {
             <button
               key={type}
               onClick={() => setFilter(type)}
-              className={`shrink-0 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+              className={`shrink-0 rounded-full border px-3 py-1.5 font-mono text-xs font-medium transition-colors ${
                 filter === type
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-border bg-card text-muted-foreground"
@@ -263,7 +263,7 @@ const StoryLibrary = () => {
                   className="rounded-lg border border-border bg-card p-4 shadow-sm"
                 >
                   {story.abuse_type && (
-                    <Badge variant="secondary" className="mb-2 text-xs">
+                    <Badge variant="secondary" className="mb-2 font-mono text-xs">
                       {lang === "sw"
                         ? abuseTypeLabels[story.abuse_type]?.sw || story.abuse_type
                         : abuseTypeLabels[story.abuse_type]?.en || story.abuse_type}
@@ -274,11 +274,11 @@ const StoryLibrary = () => {
                       {story.title}
                     </h3>
                   )}
-                  <p className="mb-3 text-sm leading-relaxed text-card-foreground">
+                  <p className="mb-3 font-serif text-sm leading-relaxed text-card-foreground">
                     {lang === "sw" && story.swahili_text ? story.swahili_text : story.text}
                   </p>
                   {story.message && (
-                    <p className="mb-3 rounded-md bg-primary/5 px-3 py-2 text-xs italic leading-relaxed text-primary">
+                    <p className="mb-3 rounded-md bg-primary/5 px-3 py-2 font-serif text-xs italic leading-relaxed text-primary">
                       💚 {story.message}
                     </p>
                   )}

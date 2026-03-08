@@ -102,7 +102,7 @@ const StoryLibrary = () => {
         s.id === storyId ? { ...s, resonance_count: s.resonance_count + 1 } : s
       )
     );
-    await supabase.rpc("increment_resonance", { story_id: storyId });
+    await supabase.rpc("increment_resonance" as any, { story_id: storyId });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

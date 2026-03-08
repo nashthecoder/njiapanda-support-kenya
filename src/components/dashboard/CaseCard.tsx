@@ -163,7 +163,7 @@ const CaseCard = ({ caseData, onUpdate }: CaseCardProps) => {
               </p>
             </div>
             <div>
-              <span className="text-muted-foreground">Detected Types</span>
+              <span className="font-mono text-muted-foreground">Detected Types</span>
               <div className="mt-1 flex flex-wrap gap-1">
                 {aiBrief.detected_abuse_types.map((t) => (
                   <span key={t} className="rounded bg-emergency/10 px-1.5 py-0.5 text-[11px] text-emergency">{t}</span>

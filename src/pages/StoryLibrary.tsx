@@ -274,7 +274,7 @@ const StoryLibrary = () => {
                       {story.title}
                     </h3>
                   )}
-                  <p className="mb-3 text-sm leading-relaxed text-card-foreground">
+                  <p className="mb-3 font-serif text-sm leading-relaxed text-card-foreground">
                     {lang === "sw" && story.swahili_text ? story.swahili_text : story.text}
                   </p>
                   {story.message && (

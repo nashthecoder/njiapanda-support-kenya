@@ -265,8 +265,8 @@ const StoryLibrary = () => {
                   {story.abuse_type && (
                     <Badge variant="secondary" className="mb-2 text-xs">
                       {lang === "sw"
-                        ? abuseTypesSw[story.abuse_type] || story.abuse_type
-                        : story.abuse_type}
+                        ? abuseTypeLabels[story.abuse_type]?.sw || story.abuse_type
+                        : abuseTypeLabels[story.abuse_type]?.en || story.abuse_type}
                     </Badge>
                   )}
                   <p className="mb-3 text-sm leading-relaxed text-card-foreground">

@@ -24,6 +24,9 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"signals" | "cases" | "safehouses">("signals");
 
+  // Real-time notifications for new signals
+  useSignalNotifications(isConductor);
+
   useEffect(() => {
     if (!authLoading && !user) {
       navigate("/login");

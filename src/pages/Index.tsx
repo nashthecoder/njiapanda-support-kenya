@@ -42,34 +42,70 @@ const Index = () => {
   return (
     <div className="min-h-screen pb-24">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-primary px-4 pb-10 pt-16">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary-foreground" />
-          <div className="absolute -left-10 bottom-0 h-40 w-40 rounded-full bg-primary-foreground" />
-        </div>
-        <div className="relative mx-auto max-w-lg">
+      <section className="relative overflow-hidden bg-forest-dk min-h-[70vh] flex flex-col justify-between">
+        {/* Hero background image */}
+        <img
+          src={heroImage}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-90"
+        />
+        <div className="relative z-10 flex flex-1 flex-col justify-between px-4 pb-6 pt-8">
+          {/* Top bar */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="mb-8 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/60"
+          >
+            <span>Paths to Safety</span>
+            <span className="text-ochre">·</span>
+            <span className="text-ochre">#SheBuilds</span>
+            <span className="text-primary-foreground/40">·</span>
+            <span>8 March 2026</span>
+          </motion.div>
+
+          {/* Wordmark + tagline */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-auto"
           >
-            <div className="mb-4 flex items-center gap-2">
-              <img src={logoMark} alt="Njiapanda logo" className="h-10 w-10" />
-              <h1 className="font-display text-3xl font-bold text-primary-foreground">
-                Njiapanda
-              </h1>
-            </div>
-            <p className="mb-6 text-lg text-primary-foreground/90">
-              You are not alone. We are here to listen, protect, and connect you with help — safely and confidentially.
+            <h1 className="font-display text-5xl font-bold leading-[1.1] sm:text-7xl">
+              <span className="text-cream">Njia</span>
+              <span className="italic text-ochre">panda</span>
+            </h1>
+            <p className="mt-3 max-w-md font-display text-lg italic text-cream/80 sm:text-xl">
+              Quietly guiding survivors to help,
+              <br />
+              without alerting abusers.
             </p>
-            <Button
-              variant="hero"
-              size="xl"
-              className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
-              onClick={() => navigate("/share")}
-            >
-              Get Support Now
-            </Button>
+          </motion.div>
+
+          {/* Bottom metadata */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-8 space-y-1 font-mono text-[10px] uppercase tracking-[0.15em] text-cream/50 sm:text-xs"
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-ochre-lt">Nairobi</span>
+              <span>·</span>
+              <span className="text-ochre-lt">Limuru</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span>Open Source</span>
+              <span>·</span>
+              <span>MIT License</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span>Lovable</span>
+              <span>·</span>
+              <span>Anthropic</span>
+              <span>·</span>
+              <span>OpenFn</span>
+            </div>
           </motion.div>
         </div>
       </section>

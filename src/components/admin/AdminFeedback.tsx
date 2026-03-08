@@ -54,7 +54,7 @@ export default function AdminFeedback() {
       .order("created_at", { ascending: false });
 
     if (typeFilter !== "all") {
-      query = query.eq("type", typeFilter);
+      query = query.eq("type", typeFilter as FeedbackType);
     }
     if (statusFilter !== "all") {
       query = query.eq("status", statusFilter);

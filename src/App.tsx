@@ -18,6 +18,7 @@ import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import EmergencyExitButton from "./components/EmergencyExitButton";
 import BottomNav from "./components/BottomNav";
+import FeedbackButton from "./components/FeedbackButton";
 
 const queryClient = new QueryClient();
 

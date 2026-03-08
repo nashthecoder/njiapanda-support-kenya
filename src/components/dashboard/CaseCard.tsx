@@ -103,7 +103,7 @@ const CaseCard = ({ caseData, onUpdate }: CaseCardProps) => {
           )}
 
           {caseData.signal?.zone && (
-            <span className="text-xs text-muted-foreground">Zone: {caseData.signal.zone}</span>
+            <span className="font-mono text-xs text-muted-foreground">Zone: {caseData.signal.zone}</span>
           )}
         </div>
 

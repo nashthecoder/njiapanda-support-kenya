@@ -1,4 +1,4 @@
-import { Home, BookOpen, Shield, Phone, MapPin, Handshake } from "lucide-react";
+import { Home, BookOpen, Shield, Phone, MapPin, Handshake, Heart } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
@@ -8,6 +8,7 @@ const navItems = [
   { icon: Shield, label: "Safety", path: "/safety" },
   { icon: MapPin, label: "Resources", path: "/resources" },
   { icon: Phone, label: "Helpline", path: "/helpline" },
+  { icon: Heart, label: "Why", path: "/why" },
   { icon: Handshake, label: "Join Us", path: "/join" },
 ];
 

@@ -238,22 +238,59 @@ All contributors must agree to our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Roadmap
 
-- [x] Story library — 15 trauma-informed scenarios, EN + Swahili
-- [x] Anonymous signal form
-- [x] Verified resource directory with Leaflet map
-- [x] Conductor dashboard with zone-based RLS
-- [x] AI risk triage — session-only, never stored
-- [x] Safe house panel with Supabase Realtime
-- [x] Admin portal — moderation, conductor management, alerts
-- [x] Contribution system — Stripe + M-Pesa + PayPal
-- [x] /join page — conductor, org, and integration onboarding
-- [ ] Africa's Talking SMS integration
-- [ ] OpenFN live integration testing with Kobo + DHIS2
-- [ ] Survivor Advisory Board
-- [ ] Offline-capable PWA for low-connectivity areas
-- [ ] Multilingual expansion — Kikuyu, Luo, Luhya
-- [ ] DPG nomination
-- [ ] Regional expansion — Uganda, Tanzania, Rwanda
+### ✅ Built & Live
+
+| Feature | Details |
+|---|---|
+| Home page | Hero, 5 quick actions, trust banner |
+| Story Library | 15 bilingual stories, search, filter, resonance |
+| Quiet Signal | Anonymous 3-field form, calm confirmation screen |
+| Share Story | Text + audio recording with transcription |
+| Safety Plan | 6-step checklist, offline via Service Worker |
+| Resources | Leaflet map + low-bandwidth text fallback |
+| Helpline | Tap-to-call, proper ARIA labels |
+| Contributions | Stripe / M-Pesa / PayPal |
+| Why Njiapanda | Personal narrative page |
+| Join Network | Conductor, org, integration onboarding |
+| Conductor Dashboard | Zone-filtered cases, AI briefs, safe house panel |
+| Admin Portal | 11 tabs: Overview, Signals, Conductors, Roles, Stories, CMS, Feedback, Partners, Resources, Safe Houses, Alerts |
+| Auth | Login, signup, password reset, role-based access |
+| Emergency Exit | Escape key + button, clears session |
+| Accessibility Layer | Skip link, high contrast toggle, low bandwidth mode, simple language toggle, ARIA labels, 48px+ tap targets, focus-visible outlines, keyboard nav |
+| Audio Transcription | Edge function via Anthropic API, consent-first, no audio stored |
+| Offline Safety Plan | Service Worker caching /safety |
+| Trauma-informed UX | Calm confirmations, no countdowns, gentle error messages |
+
+---
+
+### ❌ Pending — Must Have
+
+| Feature | Status |
+|---|---|
+| OpenFN integration (Kobo, DHIS2) | Not started |
+| Multilingual expansion (Kikuyu, Luo, Luhya) | Not started |
+| Simplified story text (english_simple / swahili_simple fields) | DB migration needed |
+| Audit Log (admin tab) | Placeholder exists |
+| DPG nomination | Process not started |
+
+---
+
+### 🔜 Could Have
+
+| Feature | Status |
+|---|---|
+| Africa's Talking SMS | Not started |
+| Full PWA (beyond /safety caching) | Not started |
+| Survivor Advisory Board | Recruiting |
+
+---
+
+### 🌍 Future
+
+| Feature | Status |
+|---|---|
+| Regional expansion — Uganda, Tanzania, Rwanda | Future |
+| OpenFN adapters for CommCare + Salesforce NPSP | Future |
 
 ---
 

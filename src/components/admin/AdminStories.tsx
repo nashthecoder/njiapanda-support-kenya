@@ -58,6 +58,12 @@ export default function AdminStories() {
 
   const reject = async (id: string) => {
     await supabase.from("stories").update({ status: "rejected" }).eq("id", id);
+    await supabase.from("audit_log" as any).insert({
+      action: "reject",
+      entity_type: "story",
+      entity_id: id,
+      details: rejectReason ? { reason: rejectReason } : {},
+    });
     setStories((prev) => prev.filter((s) => s.id !== id));
     setRejectId(null);
     setRejectReason("");

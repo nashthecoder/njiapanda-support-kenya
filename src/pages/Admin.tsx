@@ -17,6 +17,7 @@ const NAV_ITEMS = [
   { id: "signals", label: "Signals", icon: Radio, ready: false },
   { id: "conductors", label: "Conductors", icon: Users, ready: true },
   { id: "stories", label: "Stories", icon: BookOpen, ready: true },
+  { id: "feedback", label: "Feedback", icon: MessageSquarePlus, ready: true },
   { id: "resources", label: "Resources", icon: MapPin, ready: false },
   { id: "safehouses", label: "Safe Houses", icon: Home, ready: false },
   { id: "alerts", label: "Alerts", icon: Bell, ready: true },

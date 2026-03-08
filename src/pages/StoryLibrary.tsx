@@ -66,6 +66,8 @@ const StoryLibrary = () => {
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
   const [resonated, setResonated] = useState<Set<string>>(new Set());
 
   // Submission form state

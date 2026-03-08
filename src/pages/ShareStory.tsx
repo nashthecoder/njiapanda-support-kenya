@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Send } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const abuseTypes = ["Physical", "Sexual", "Emotional", "Economic", "Other"];
 const languages = ["English", "Kiswahili", "Sheng"];

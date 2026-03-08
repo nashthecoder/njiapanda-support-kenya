@@ -175,7 +175,7 @@ const Dashboard = () => {
                       <div className="mb-2 flex flex-wrap items-center gap-2">
                         <UrgencyBadge urgency={signal.urgency} />
                         {signal.zone && (
-                          <span className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
+                          <span className="rounded-full bg-secondary px-2 py-0.5 font-mono text-xs text-secondary-foreground">
                             {signal.zone}
                           </span>
                         )}

@@ -138,4 +138,59 @@
     font-family: var(--font-display);
     font-weight: 600;
   }
+
+  /* Focus-visible for all interactive elements */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* High contrast mode overrides */
+body.high-contrast {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 5%;
+  --card-foreground: 0 0% 100%;
+  --popover: 0 0% 5%;
+  --popover-foreground: 0 0% 100%;
+  --primary: 152 100% 50%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 0 0% 12%;
+  --muted-foreground: 0 0% 75%;
+  --accent: 48 100% 50%;
+  --accent-foreground: 0 0% 0%;
+  --destructive: 0 100% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 40%;
+  --input: 0 0% 30%;
+  --ring: 48 100% 50%;
+  --emergency: 0 100% 50%;
+  --emergency-foreground: 0 0% 100%;
+  --safe: 152 100% 50%;
+  --safe-foreground: 0 0% 0%;
+  --warning: 48 100% 50%;
+  --warning-foreground: 0 0% 0%;
+}
+
+/* Low bandwidth mode banner */
+.low-bandwidth-banner {
+  @apply rounded-md bg-accent px-3 py-2 text-center text-xs font-medium text-accent-foreground;
 }

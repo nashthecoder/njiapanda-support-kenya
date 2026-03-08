@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import Contribute from "./pages/Contribute";
+import JoinNetwork from "./pages/JoinNetwork";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import EmergencyExitButton from "./components/EmergencyExitButton";

@@ -22,6 +22,7 @@ const Dashboard = () => {
   const [signals, setSignals] = useState<Signal[]>([]);
   const [cases, setCases] = useState<CaseWithSignal[]>([]);
   const [loading, setLoading] = useState(true);
+  const [conductorZone, setConductorZone] = useState<string | null | undefined>(undefined);
   const [activeTab, setActiveTab] = useState<"signals" | "cases" | "safehouses">("signals");
 
   // Real-time notifications for new signals

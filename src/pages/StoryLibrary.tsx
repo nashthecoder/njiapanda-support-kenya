@@ -278,7 +278,7 @@ const StoryLibrary = () => {
                     {lang === "sw" && story.swahili_text ? story.swahili_text : story.text}
                   </p>
                   {story.message && (
-                    <p className="mb-3 rounded-md bg-primary/5 px-3 py-2 text-xs italic leading-relaxed text-primary">
+                    <p className="mb-3 rounded-md bg-primary/5 px-3 py-2 font-serif text-xs italic leading-relaxed text-primary">
                       💚 {story.message}
                     </p>
                   )}

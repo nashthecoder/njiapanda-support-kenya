@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import {
   BarChart3, Users, BookOpen, Shield, MapPin, Home, Bell, ClipboardList,
-  LogOut, Radio, MessageSquarePlus, Handshake,
+  LogOut, Radio, MessageSquarePlus, Handshake, UserCog, PenLine,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminOverview from "@/components/admin/AdminOverview";
@@ -12,16 +12,23 @@ import AdminStories from "@/components/admin/AdminStories";
 import AdminAlerts from "@/components/admin/AdminAlerts";
 import AdminFeedback from "@/components/admin/AdminFeedback";
 import AdminPartners from "@/components/admin/AdminPartners";
+import AdminUserRoles from "@/components/admin/AdminUserRoles";
+import AdminStoryCMS from "@/components/admin/AdminStoryCMS";
+import AdminResources from "@/components/admin/AdminResources";
+import AdminSafeHouses from "@/components/admin/AdminSafeHouses";
+import AdminSignals from "@/components/admin/AdminSignals";
 
 const NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: BarChart3, ready: true },
-  { id: "signals", label: "Signals", icon: Radio, ready: false },
+  { id: "signals", label: "Signals", icon: Radio, ready: true },
   { id: "conductors", label: "Conductors", icon: Users, ready: true },
+  { id: "roles", label: "User Roles", icon: UserCog, ready: true },
   { id: "stories", label: "Stories", icon: BookOpen, ready: true },
+  { id: "cms", label: "Create Story", icon: PenLine, ready: true },
   { id: "feedback", label: "Feedback", icon: MessageSquarePlus, ready: true },
   { id: "partners", label: "Partners", icon: Handshake, ready: true },
-  { id: "resources", label: "Resources", icon: MapPin, ready: false },
-  { id: "safehouses", label: "Safe Houses", icon: Home, ready: false },
+  { id: "resources", label: "Resources", icon: MapPin, ready: true },
+  { id: "safehouses", label: "Safe Houses", icon: Home, ready: true },
   { id: "alerts", label: "Alerts", icon: Bell, ready: true },
   { id: "audit", label: "Audit Log", icon: ClipboardList, ready: false },
 ] as const;
@@ -102,16 +109,19 @@ export default function Admin() {
       {/* Main content */}
       <main className="flex-1 overflow-y-auto">
         {tab === "overview" && <AdminOverview onNavigate={(t) => setTab(t as TabId)} />}
+        {tab === "signals" && <AdminSignals />}
         {tab === "conductors" && <AdminConductors />}
+        {tab === "roles" && <AdminUserRoles />}
         {tab === "stories" && <AdminStories />}
+        {tab === "cms" && <AdminStoryCMS />}
         {tab === "feedback" && <AdminFeedback />}
         {tab === "partners" && <AdminPartners />}
+        {tab === "resources" && <AdminResources />}
+        {tab === "safehouses" && <AdminSafeHouses />}
         {tab === "alerts" && <AdminAlerts />}
-        {!["overview", "conductors", "stories", "feedback", "partners", "alerts"].includes(tab) && (
+        {tab === "audit" && (
           <div className="flex h-full items-center justify-center">
-            <p className="text-muted-foreground">
-              {NAV_ITEMS.find((n) => n.id === tab)?.label} — coming soon.
-            </p>
+            <p className="text-muted-foreground">Audit Log — coming soon.</p>
           </div>
         )}
       </main>

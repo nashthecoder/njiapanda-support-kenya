@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Cormorant Garamond", "Georgia", "serif"],
-        body: ["DM Sans", "system-ui", "sans-serif"],
+        display: ["Crimson Pro", "Georgia", "serif"],
+        body: ["IBM Plex Serif", "Georgia", "serif"],
         mono: ["DM Mono", "Courier New", "monospace"],
       },
       colors: {

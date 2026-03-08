@@ -116,7 +116,17 @@ const Sauti = () => {
       const ws = new WebSocket(data.wsUrl);
       wsRef.current = ws;
 
+      // Timeout: if WebSocket doesn't open within 10s, reset
+      const connectTimeout = setTimeout(() => {
+        if (ws.readyState !== WebSocket.OPEN) {
+          ws.close();
+          setState("idle");
+        }
+      }, 10000);
+
       ws.onopen = () => {
+        clearTimeout(connectTimeout);
+
         // Send Gemini Live setup message
         ws.send(
           JSON.stringify({

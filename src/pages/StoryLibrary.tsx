@@ -43,18 +43,43 @@ const t: Record<string, Record<Lang, string>> = {
   },
 };
 
-const abuseTypes = ["Physical", "Sexual", "Emotional", "Economic", "Other"];
-const abuseTypesSw: Record<string, string> = {
-  Physical: "Kimwili",
-  Sexual: "Kingono",
-  Emotional: "Kihisia",
-  Economic: "Kiuchumi",
-  Other: "Nyingine",
+const abuseTypes = [
+  "Physical", "Sexual", "Emotional", "Economic",
+  "financial_abuse", "digital_surveillance", "isolation",
+  "coercive_control", "physical_abuse", "reproductive_coercion",
+  "psychological_abuse", "public_humiliation", "stalking",
+  "sexual_coercion", "spiritual_abuse", "elder_abuse",
+  "workplace_abuse", "child_marriage", "Other",
+];
+
+const abuseTypeLabels: Record<string, Record<string, string>> = {
+  Physical: { en: "Physical", sw: "Kimwili" },
+  Sexual: { en: "Sexual", sw: "Kingono" },
+  Emotional: { en: "Emotional", sw: "Kihisia" },
+  Economic: { en: "Economic", sw: "Kiuchumi" },
+  financial_abuse: { en: "Financial Abuse", sw: "Unyanyasaji wa Kifedha" },
+  digital_surveillance: { en: "Digital Surveillance", sw: "Ufuatiliaji wa Kidijitali" },
+  isolation: { en: "Isolation", sw: "Kutengwa" },
+  coercive_control: { en: "Coercive Control", sw: "Udhibiti wa Kulazimisha" },
+  physical_abuse: { en: "Physical Abuse", sw: "Unyanyasaji wa Kimwili" },
+  reproductive_coercion: { en: "Reproductive Coercion", sw: "Kulazimishwa Uzazi" },
+  psychological_abuse: { en: "Psychological Abuse", sw: "Unyanyasaji wa Kisaikolojia" },
+  public_humiliation: { en: "Public Humiliation", sw: "Kudhalilishwa Hadharani" },
+  stalking: { en: "Stalking", sw: "Kufuatiliwa" },
+  sexual_coercion: { en: "Sexual Coercion", sw: "Kulazimishwa Kingono" },
+  spiritual_abuse: { en: "Spiritual Abuse", sw: "Unyanyasaji wa Kiroho" },
+  elder_abuse: { en: "Elder Abuse", sw: "Unyanyasaji wa Wazee" },
+  workplace_abuse: { en: "Workplace Abuse", sw: "Unyanyasaji Kazini" },
+  child_marriage: { en: "Child Marriage", sw: "Ndoa ya Watoto" },
+  Other: { en: "Other", sw: "Nyingine" },
 };
 
 type Story = {
   id: string;
   text: string;
+  title: string | null;
+  swahili_text: string | null;
+  message: string | null;
   abuse_type: string | null;
   resonance_count: number;
   created_at: string;
@@ -79,7 +104,7 @@ const StoryLibrary = () => {
     setLoading(true);
     let query = supabase
       .from("stories")
-      .select("id, text, abuse_type, resonance_count, created_at")
+      .select("id, text, title, swahili_text, message, abuse_type, resonance_count, created_at")
       .eq("status", "approved")
       .order("created_at", { ascending: false });
 
@@ -206,10 +231,10 @@ const StoryLibrary = () => {
               }`}
             >
               {lang === "sw" && type !== "All"
-                ? abuseTypesSw[type] || type
+                ? abuseTypeLabels[type]?.sw || type
                 : type === "All"
                 ? label("filterAll")
-                : type}
+                : abuseTypeLabels[type]?.en || type}
             </button>
           ))}
         </div>
@@ -240,13 +265,23 @@ const StoryLibrary = () => {
                   {story.abuse_type && (
                     <Badge variant="secondary" className="mb-2 text-xs">
                       {lang === "sw"
-                        ? abuseTypesSw[story.abuse_type] || story.abuse_type
-                        : story.abuse_type}
+                        ? abuseTypeLabels[story.abuse_type]?.sw || story.abuse_type
+                        : abuseTypeLabels[story.abuse_type]?.en || story.abuse_type}
                     </Badge>
                   )}
+                  {story.title && (
+                    <h3 className="mb-2 font-display text-base font-semibold text-foreground">
+                      {story.title}
+                    </h3>
+                  )}
                   <p className="mb-3 text-sm leading-relaxed text-card-foreground">
-                    {story.text}
+                    {lang === "sw" && story.swahili_text ? story.swahili_text : story.text}
                   </p>
+                  {story.message && (
+                    <p className="mb-3 rounded-md bg-primary/5 px-3 py-2 text-xs italic leading-relaxed text-primary">
+                      💚 {story.message}
+                    </p>
+                  )}
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleResonate(story.id)}
@@ -319,7 +354,7 @@ const StoryLibrary = () => {
                           : "border-border bg-background text-muted-foreground"
                       }`}
                     >
-                      {lang === "sw" ? abuseTypesSw[tp] || tp : tp}
+                      {lang === "sw" ? abuseTypeLabels[tp]?.sw || tp : abuseTypeLabels[tp]?.en || tp}
                     </button>
                   ))}
                 </div>

@@ -212,30 +212,42 @@ export type Database = {
           created_at: string
           id: string
           language: string | null
+          message: string | null
           resonance_count: number
           source: string | null
           status: string | null
+          swahili_text: string | null
+          tags: string[] | null
           text: string
+          title: string | null
         }
         Insert: {
           abuse_type?: string | null
           created_at?: string
           id?: string
           language?: string | null
+          message?: string | null
           resonance_count?: number
           source?: string | null
           status?: string | null
+          swahili_text?: string | null
+          tags?: string[] | null
           text: string
+          title?: string | null
         }
         Update: {
           abuse_type?: string | null
           created_at?: string
           id?: string
           language?: string | null
+          message?: string | null
           resonance_count?: number
           source?: string | null
           status?: string | null
+          swahili_text?: string | null
+          tags?: string[] | null
           text?: string
+          title?: string | null
         }
         Relationships: []
       }

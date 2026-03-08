@@ -107,6 +107,42 @@ export type Database = {
         }
         Relationships: []
       }
+      feedback: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          message: string
+          page_url: string | null
+          resolved_at: string | null
+          resolved_by: string | null
+          status: string
+          type: Database["public"]["Enums"]["feedback_type"]
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message: string
+          page_url?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: string
+          type?: Database["public"]["Enums"]["feedback_type"]
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string
+          page_url?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: string
+          type?: Database["public"]["Enums"]["feedback_type"]
+        }
+        Relationships: []
+      }
       platform_config: {
         Row: {
           key: string
@@ -312,6 +348,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "conductor" | "user"
+      feedback_type: "bug" | "contact" | "suggestion" | "other"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -440,6 +477,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "conductor", "user"],
+      feedback_type: ["bug", "contact", "suggestion", "other"],
     },
   },
 } as const

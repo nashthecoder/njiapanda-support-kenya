@@ -170,6 +170,7 @@ export type Database = {
           created_at: string
           id: string
           language: string | null
+          resonance_count: number
           source: string | null
           status: string | null
           text: string
@@ -179,6 +180,7 @@ export type Database = {
           created_at?: string
           id?: string
           language?: string | null
+          resonance_count?: number
           source?: string | null
           status?: string | null
           text: string
@@ -188,6 +190,7 @@ export type Database = {
           created_at?: string
           id?: string
           language?: string | null
+          resonance_count?: number
           source?: string | null
           status?: string | null
           text?: string

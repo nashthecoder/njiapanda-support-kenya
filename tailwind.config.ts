@@ -5,6 +5,13 @@ export default {
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
+    fontFamily: {
+      display: ['"Crimson Pro"', "Georgia", "serif"],
+      body: ['"DM Sans"', "system-ui", "sans-serif"],
+      sans: ['"DM Sans"', "system-ui", "sans-serif"],
+      mono: ['"DM Mono"', '"Courier New"', "monospace"],
+      serif: ['"IBM Plex Serif"', "Georgia", "serif"],
+    },
     container: {
       center: true,
       padding: "1rem",
@@ -13,12 +20,6 @@ export default {
       },
     },
     extend: {
-      fontFamily: {
-        display: ["Crimson Pro", "Georgia", "serif"],
-        body: ["DM Sans", "system-ui", "sans-serif"],
-        mono: ["DM Mono", "Courier New", "monospace"],
-        serif: ["IBM Plex Serif", "Georgia", "serif"],
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

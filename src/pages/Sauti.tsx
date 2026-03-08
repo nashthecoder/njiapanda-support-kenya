@@ -256,7 +256,7 @@ const Sauti = () => {
       style={{ backgroundColor: "#091F1A" }}
     >
       {/* Language toggle */}
-      <div className="fixed top-3 right-3 z-50 flex gap-1">
+      <div className="fixed top-3 left-3 z-50 flex gap-1">
         {(["en", "sw"] as Lang[]).map((l) => (
           <button
             key={l}

@@ -379,6 +379,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_search_profiles: {
+        Args: { search_term: string }
+        Returns: {
+          created_at: string
+          full_name: string
+          id: string
+          zone: string
+        }[]
+      }
       get_conductor_zone: { Args: { _user_id: string }; Returns: string }
       get_my_conductor_zone: { Args: never; Returns: string }
       has_role: {

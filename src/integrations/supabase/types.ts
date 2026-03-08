@@ -143,6 +143,51 @@ export type Database = {
         }
         Relationships: []
       }
+      partner_expressions: {
+        Row: {
+          contact_email: string | null
+          contact_phone: string | null
+          created_at: string
+          extra: Json | null
+          id: string
+          message: string | null
+          name: string
+          organisation: string | null
+          role: string | null
+          status: string
+          type: string
+          zone: string | null
+        }
+        Insert: {
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          extra?: Json | null
+          id?: string
+          message?: string | null
+          name: string
+          organisation?: string | null
+          role?: string | null
+          status?: string
+          type: string
+          zone?: string | null
+        }
+        Update: {
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          extra?: Json | null
+          id?: string
+          message?: string | null
+          name?: string
+          organisation?: string | null
+          role?: string | null
+          status?: string
+          type?: string
+          zone?: string | null
+        }
+        Relationships: []
+      }
       platform_config: {
         Row: {
           key: string

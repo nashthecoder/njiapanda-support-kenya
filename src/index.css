@@ -78,8 +78,9 @@
     --sidebar-ring: 168 53% 24%;
 
     --font-display: 'Crimson Pro', Georgia, serif;
-    --font-body: 'IBM Plex Serif', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
     --font-mono: 'DM Mono', 'Courier New', monospace;
+    --font-serif: 'IBM Plex Serif', Georgia, serif;
 
     /* ── Shadows ── */
     --shadow-sm: 0 1px 3px rgba(26,22,18,0.08);

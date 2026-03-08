@@ -34,6 +34,9 @@ const App = () => (
           <Route path="/resources" element={<Resources />} />
           <Route path="/helpline" element={<Helpline />} />
           <Route path="/signal" element={<QuietSignal />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <BottomNav />

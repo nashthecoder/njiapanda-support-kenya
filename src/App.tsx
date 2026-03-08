@@ -10,6 +10,9 @@ import Safety from "./pages/Safety";
 import Resources from "./pages/Resources";
 import Helpline from "./pages/Helpline";
 import QuietSignal from "./pages/QuietSignal";
+import Login from "./pages/Login";
+import ResetPassword from "./pages/ResetPassword";
+import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import EmergencyExitButton from "./components/EmergencyExitButton";
 import BottomNav from "./components/BottomNav";
@@ -31,6 +34,9 @@ const App = () => (
           <Route path="/resources" element={<Resources />} />
           <Route path="/helpline" element={<Helpline />} />
           <Route path="/signal" element={<QuietSignal />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <BottomNav />

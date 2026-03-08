@@ -202,7 +202,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      increment_resonance: { Args: { story_id: string }; Returns: undefined }
     }
     Enums: {
       [_ in never]: never

@@ -24,6 +24,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [conductorZone, setConductorZone] = useState<string | null | undefined>(undefined);
   const [activeTab, setActiveTab] = useState<"signals" | "cases" | "safehouses">("signals");
+  const [voiceFilter, setVoiceFilter] = useState(false);
 
   // Real-time notifications for new signals
   useSignalNotifications(isConductor);

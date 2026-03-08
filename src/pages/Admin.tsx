@@ -120,11 +120,7 @@ export default function Admin() {
         {tab === "resources" && <AdminResources />}
         {tab === "safehouses" && <AdminSafeHouses />}
         {tab === "alerts" && <AdminAlerts />}
-        {tab === "audit" && (
-          <div className="flex h-full items-center justify-center">
-            <p className="text-muted-foreground">Audit Log — coming soon.</p>
-          </div>
-        )}
+        {tab === "audit" && <AdminAuditLog />}
       </main>
     </div>
   );

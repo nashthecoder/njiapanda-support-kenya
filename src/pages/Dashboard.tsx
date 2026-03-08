@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { LogOut, Shield, AlertTriangle, Clock, Sparkles } from "lucide-react";
 import CaseCard from "@/components/dashboard/CaseCard";
 import SafeHousePanel from "@/components/dashboard/SafeHousePanel";
+import { useSignalNotifications } from "@/hooks/useSignalNotifications";
 import type { Tables } from "@/integrations/supabase/types";
 
 type Signal = Tables<"signals">;

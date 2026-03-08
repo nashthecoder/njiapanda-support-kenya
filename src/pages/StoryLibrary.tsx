@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useAccessibility } from "@/hooks/useAccessibility";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Heart, Send, Phone, Filter, Search, X } from "lucide-react";

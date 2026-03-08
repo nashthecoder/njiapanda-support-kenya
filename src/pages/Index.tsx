@@ -53,7 +53,7 @@ const Index = () => {
             transition={{ duration: 0.5 }}
           >
             <div className="mb-4 flex items-center gap-2">
-              <Heart className="h-8 w-8 text-primary-foreground" />
+              <img src={logoMark} alt="Njiapanda logo" className="h-10 w-10" />
               <h1 className="font-display text-3xl font-bold text-primary-foreground">
                 Njiapanda
               </h1>

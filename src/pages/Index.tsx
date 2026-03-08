@@ -2,6 +2,7 @@ import { Shield, MessageCircle, Phone, MapPin, Radio } from "lucide-react";
 import heroImage from "@/assets/njiapanda_hero.png";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import AccessibilityToolbar from "@/components/AccessibilityToolbar";
 
 const quickActions = [
   {
@@ -46,18 +47,25 @@ const Index = () => {
 
   return (
     <div className="min-h-screen pb-24">
+      {/* Accessibility toolbar */}
+      <div className="flex justify-end px-4 py-2">
+        <AccessibilityToolbar />
+      </div>
+
       {/* Hero */}
       <section className="relative overflow-hidden bg-forest-dk">
         <img
           src={heroImage}
-          alt="Njiapanda – Paths to Safety"
+          alt="Njiapanda – Paths to Safety: a community-led support platform for survivors of gender-based violence in Kenya"
           className="w-full h-auto block"
+          loading="eager"
         />
       </section>
 
       {/* Quick Actions */}
-      <section className="px-4 py-8">
+      <main id="main-content" role="main" className="px-4 py-8">
         <div className="mx-auto max-w-lg">
+          <h1 className="sr-only">Njiapanda — Paths to Safety</h1>
           <h2 className="mb-4 font-display text-xl font-semibold text-foreground">
             How can we help?
           </h2>
@@ -69,10 +77,11 @@ const Index = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 * i, duration: 0.4 }}
                 onClick={() => navigate(action.path)}
-                className="flex items-center gap-4 rounded-lg border border-border bg-card p-4 text-left shadow-sm transition-shadow hover:shadow-md active:scale-[0.98]"
+                className="flex min-h-[64px] items-center gap-4 rounded-lg border border-border bg-card p-4 text-left shadow-sm transition-shadow hover:shadow-md active:scale-[0.98]"
+                aria-label={`${action.title} — ${action.description}`}
               >
                 <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${action.color}`}>
-                  <action.icon className="h-6 w-6" />
+                  <action.icon className="h-6 w-6" aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-card-foreground">{action.title}</h3>
@@ -82,12 +91,12 @@ const Index = () => {
             ))}
           </div>
         </div>
-      </section>
+      </main>
 
       {/* Trust banner */}
-      <section className="px-4 pb-8">
+      <section className="px-4 pb-8" aria-label="Privacy assurance">
         <div className="mx-auto max-w-lg rounded-lg bg-secondary p-4 text-center">
-          <Shield className="mx-auto mb-2 h-6 w-6 text-primary" />
+          <Shield className="mx-auto mb-2 h-6 w-6 text-primary" aria-hidden="true" />
           <p className="text-sm font-medium text-secondary-foreground">
             Your privacy is protected. No personal data is stored without your consent.
           </p>

@@ -109,16 +109,19 @@ export default function Admin() {
       {/* Main content */}
       <main className="flex-1 overflow-y-auto">
         {tab === "overview" && <AdminOverview onNavigate={(t) => setTab(t as TabId)} />}
+        {tab === "signals" && <AdminSignals />}
         {tab === "conductors" && <AdminConductors />}
+        {tab === "roles" && <AdminUserRoles />}
         {tab === "stories" && <AdminStories />}
+        {tab === "cms" && <AdminStoryCMS />}
         {tab === "feedback" && <AdminFeedback />}
         {tab === "partners" && <AdminPartners />}
+        {tab === "resources" && <AdminResources />}
+        {tab === "safehouses" && <AdminSafeHouses />}
         {tab === "alerts" && <AdminAlerts />}
-        {!["overview", "conductors", "stories", "feedback", "partners", "alerts"].includes(tab) && (
+        {tab === "audit" && (
           <div className="flex h-full items-center justify-center">
-            <p className="text-muted-foreground">
-              {NAV_ITEMS.find((n) => n.id === tab)?.label} — coming soon.
-            </p>
+            <p className="text-muted-foreground">Audit Log — coming soon.</p>
           </div>
         )}
       </main>

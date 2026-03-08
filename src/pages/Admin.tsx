@@ -42,7 +42,7 @@ export default function Admin() {
 
   useEffect(() => {
     if (!loading && (!user || !isAdmin)) {
-      navigate("/login", { replace: true });
+      navigate("/admin/login", { replace: true });
     }
   }, [loading, user, isAdmin, navigate]);
 

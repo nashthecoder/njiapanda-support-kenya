@@ -209,58 +209,83 @@ const Dashboard = () => {
       <main className="mx-auto max-w-5xl px-4 py-6">
         {activeTab === "signals" && (
           <div className="space-y-3">
-            {unresolvedSignals.length === 0 ? (
-              <div className="rounded-lg border border-border bg-card p-8 text-center">
-                <Sparkles className="mx-auto mb-2 h-8 w-8 text-safe" />
-                <p className="text-muted-foreground">No unassigned signals</p>
-              </div>
-            ) : (
-              unresolvedSignals.map((signal) => (
-                <div
-                  key={signal.id}
-                  className="rounded-lg border border-border bg-card p-4 shadow-sm"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex-1">
-                      <div className="mb-2 flex flex-wrap items-center gap-2">
-                        <UrgencyBadge urgency={signal.urgency} />
-                        {(signal as any).source === "sauti_voice" && (
-                          <span className="rounded-full bg-[#C4871A]/10 px-2 py-0.5 font-mono text-xs font-semibold text-[#C4871A]">
-                            🎙️ Voice
-                          </span>
-                        )}
-                        {signal.zone && (
-                          <span className="rounded-full bg-secondary px-2 py-0.5 font-mono text-xs text-secondary-foreground">
-                            {signal.zone}
-                          </span>
-                        )}
-                        <span className="font-mono text-xs text-muted-foreground">
-                          {timeAgo(signal.created_at)}
-                        </span>
-                      </div>
-                      {signal.resource_needed && (
-                        <div className="mb-2 flex flex-wrap gap-1">
-                          {signal.resource_needed.split(", ").map((r) => (
-                            <span key={r} className="rounded bg-accent px-2 py-0.5 font-mono text-xs text-accent-foreground">
-                              {r}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                      <p className="text-xs text-muted-foreground">
-                        Consent: {signal.consent ? "Yes" : "No"}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => createCaseFromSignal(signal)}
-                      className="shrink-0 rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground"
-                    >
-                      Create Case
-                    </button>
-                  </div>
+            {/* Voice filter chip */}
+            <div className="flex gap-2">
+              <button
+                onClick={() => setVoiceFilter(!voiceFilter)}
+                className={`flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                  voiceFilter
+                    ? "bg-[#C4871A]/20 text-[#C4871A] ring-1 ring-[#C4871A]/40"
+                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                }`}
+              >
+                🎙️ Voice
+              </button>
+            </div>
+            {(() => {
+              const filtered = voiceFilter
+                ? unresolvedSignals.filter((s) => (s as any).source === "sauti_voice")
+                : unresolvedSignals;
+              return filtered.length === 0 ? (
+                <div className="rounded-lg border border-border bg-card p-8 text-center">
+                  <Sparkles className="mx-auto mb-2 h-8 w-8 text-safe" />
+                  <p className="text-muted-foreground">
+                    {voiceFilter ? "No voice signals" : "No unassigned signals"}
+                  </p>
                 </div>
-              ))
-            )}
+              ) : (
+                filtered.map((signal) => (
+                  <div
+                    key={signal.id}
+                    className="rounded-lg border border-border bg-card p-4 shadow-sm"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1">
+                        <div className="mb-2 flex flex-wrap items-center gap-2">
+                          <UrgencyBadge urgency={signal.urgency} />
+                          {(signal as any).source === "sauti_voice" && (
+                            <span className="rounded-full bg-[#C4871A]/10 px-2 py-0.5 font-mono text-xs font-semibold text-[#C4871A]">
+                              🎙️ Voice
+                            </span>
+                          )}
+                          {signal.zone && (
+                            <span className="rounded-full bg-secondary px-2 py-0.5 font-mono text-xs text-secondary-foreground">
+                              {signal.zone}
+                            </span>
+                          )}
+                          <span className="font-mono text-xs text-muted-foreground">
+                            {timeAgo(signal.created_at)}
+                          </span>
+                        </div>
+                        {(signal as any).source === "sauti_voice" && (
+                          <p className="mb-1 text-xs italic text-[#C4871A]/70">
+                            Received via Sauti voice agent · Language: {(signal.language || "sw").toUpperCase()} · No audio stored
+                          </p>
+                        )}
+                        {signal.resource_needed && (
+                          <div className="mb-2 flex flex-wrap gap-1">
+                            {signal.resource_needed.split(", ").map((r) => (
+                              <span key={r} className="rounded bg-accent px-2 py-0.5 font-mono text-xs text-accent-foreground">
+                                {r}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        <p className="text-xs text-muted-foreground">
+                          Consent: {signal.consent ? "Yes" : "No"}
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => createCaseFromSignal(signal)}
+                        className="shrink-0 rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground"
+                      >
+                        Create Case
+                      </button>
+                    </div>
+                  </div>
+                ))
+              );
+            })()}
           </div>
         )}
 

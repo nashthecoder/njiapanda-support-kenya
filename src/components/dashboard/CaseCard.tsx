@@ -82,7 +82,7 @@ const CaseCard = ({ caseData, onUpdate }: CaseCardProps) => {
               {caseData.status?.replace("_", " ") ?? "open"}
             </span>
             {caseData.risk_level && (
-              <span className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
+              <span className="rounded-full bg-secondary px-2 py-0.5 font-mono text-xs text-secondary-foreground">
                 Risk: {caseData.risk_level}
               </span>
             )}

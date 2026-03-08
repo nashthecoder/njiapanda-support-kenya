@@ -179,7 +179,7 @@ const Dashboard = () => {
                             {signal.zone}
                           </span>
                         )}
-                        <span className="text-xs text-muted-foreground">
+                        <span className="font-mono text-xs text-muted-foreground">
                           {timeAgo(signal.created_at)}
                         </span>
                       </div>

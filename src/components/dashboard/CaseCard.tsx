@@ -86,7 +86,7 @@ const CaseCard = ({ caseData, onUpdate }: CaseCardProps) => {
                 Risk: {caseData.risk_level}
               </span>
             )}
-            <span className="text-xs text-muted-foreground">
+            <span className="font-mono text-xs text-muted-foreground">
               Updated {timeAgo(caseData.updated_at)}
             </span>
           </div>

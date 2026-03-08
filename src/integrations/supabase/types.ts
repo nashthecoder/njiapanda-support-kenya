@@ -83,6 +83,27 @@ export type Database = {
         }
         Relationships: []
       }
+      contributions: {
+        Row: {
+          contribution_count: number
+          id: string
+          total_amount: number
+          updated_at: string
+        }
+        Insert: {
+          contribution_count?: number
+          id?: string
+          total_amount?: number
+          updated_at?: string
+        }
+        Update: {
+          contribution_count?: number
+          id?: string
+          total_amount?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -249,6 +270,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      increment_contribution: { Args: { amount: number }; Returns: undefined }
       increment_resonance: { Args: { story_id: string }; Returns: undefined }
     }
     Enums: {

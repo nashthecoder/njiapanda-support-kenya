@@ -13,6 +13,7 @@ import QuietSignal from "./pages/QuietSignal";
 import Login from "./pages/Login";
 import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
+import Contribute from "./pages/Contribute";
 import NotFound from "./pages/NotFound";
 import EmergencyExitButton from "./components/EmergencyExitButton";
 import BottomNav from "./components/BottomNav";
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/contribute" element={<Contribute />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <BottomNav />

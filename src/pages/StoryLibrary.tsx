@@ -231,7 +231,7 @@ const StoryLibrary = () => {
               }`}
             >
               {lang === "sw" && type !== "All"
-                ? abuseTypesSw[type] || type
+                ? abuseTypeLabels[type]?.sw || type
                 : type === "All"
                 ? label("filterAll")
                 : type}

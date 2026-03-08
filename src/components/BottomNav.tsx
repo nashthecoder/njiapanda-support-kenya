@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 const navItems = [
   { icon: Home, label: "Home", path: "/" },
-  { icon: MessageCircle, label: "Share", path: "/share" },
+  { icon: BookOpen, label: "Stories", path: "/stories" },
   { icon: Shield, label: "Safety", path: "/safety" },
   { icon: MapPin, label: "Resources", path: "/resources" },
   { icon: Phone, label: "Helpline", path: "/helpline" },

@@ -8,6 +8,7 @@ const navItems = [
   { icon: Shield, label: "Safety", path: "/safety" },
   { icon: MapPin, label: "Resources", path: "/resources" },
   { icon: Phone, label: "Helpline", path: "/helpline" },
+  { icon: Handshake, label: "Join Us", path: "/join" },
 ];
 
 const BottomNav = () => {

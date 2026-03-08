@@ -22,6 +22,7 @@ const Dashboard = () => {
   const [signals, setSignals] = useState<Signal[]>([]);
   const [cases, setCases] = useState<CaseWithSignal[]>([]);
   const [loading, setLoading] = useState(true);
+  const [conductorZone, setConductorZone] = useState<string | null | undefined>(undefined);
   const [activeTab, setActiveTab] = useState<"signals" | "cases" | "safehouses">("signals");
 
   // Real-time notifications for new signals
@@ -44,27 +45,42 @@ const Dashboard = () => {
 
   const fetchData = async () => {
     setLoading(true);
+
+    // Resolve conductor's zone first
+    const { data: zoneData } = await supabase.rpc("get_conductor_zone", {
+      _user_id: user!.id,
+    });
+    const zone = zoneData as string | null;
+    setConductorZone(zone);
+
+    if (!zone) {
+      setLoading(false);
+      return;
+    }
+
     const [signalsRes, casesRes] = await Promise.all([
-      supabase.from("signals").select("*").order("created_at", { ascending: false }),
+      supabase.from("signals").select("*").eq("zone", zone).order("created_at", { ascending: false }),
       supabase.from("cases").select("*").order("updated_at", { ascending: false }),
     ]);
 
     if (signalsRes.data) setSignals(signalsRes.data);
     if (casesRes.data) {
-      // Enrich cases with their signal data
-      const enriched: CaseWithSignal[] = await Promise.all(
-        casesRes.data.map(async (c) => {
-          if (c.signal_id) {
-            const { data: sig } = await supabase
-              .from("signals")
-              .select("*")
-              .eq("id", c.signal_id)
-              .single();
-            return { ...c, signal: sig };
-          }
-          return { ...c, signal: null };
-        })
-      );
+      // Enrich cases with their signal data, then filter to zone
+      const enriched: CaseWithSignal[] = (
+        await Promise.all(
+          casesRes.data.map(async (c) => {
+            if (c.signal_id) {
+              const { data: sig } = await supabase
+                .from("signals")
+                .select("*")
+                .eq("id", c.signal_id)
+                .single();
+              return { ...c, signal: sig };
+            }
+            return { ...c, signal: null };
+          })
+        )
+      ).filter((c) => c.signal?.zone === zone);
       setCases(enriched);
     }
     setLoading(false);
@@ -107,6 +123,35 @@ const Dashboard = () => {
     );
   }
 
+  if (conductorZone === null) {
+    return (
+      <div className="min-h-screen bg-background">
+        <header className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur-md">
+          <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+            <div className="flex items-center gap-2">
+              <Shield className="h-5 w-5 text-primary" />
+              <h1 className="font-display text-lg font-semibold text-foreground">Conductor Dashboard</h1>
+            </div>
+            <button
+              onClick={async () => { await signOut(); navigate("/"); }}
+              className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+            >
+              <LogOut className="h-4 w-4" />
+              Sign out
+            </button>
+          </div>
+        </header>
+        <div className="mx-auto max-w-lg px-4 py-16 text-center">
+          <Shield className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+          <h2 className="mb-2 font-display text-xl font-semibold text-foreground">Zone not configured</h2>
+          <p className="text-sm text-muted-foreground">
+            Your zone has not been configured yet. Contact your administrator.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -115,6 +160,9 @@ const Dashboard = () => {
           <div className="flex items-center gap-2">
             <Shield className="h-5 w-5 text-primary" />
             <h1 className="font-display text-lg font-semibold text-foreground">Conductor Dashboard</h1>
+            <span className="rounded-full bg-secondary px-2.5 py-0.5 font-mono text-xs font-medium text-secondary-foreground">
+              {conductorZone} · Conductor View
+            </span>
           </div>
           <button
             onClick={async () => { await signOut(); navigate("/"); }}

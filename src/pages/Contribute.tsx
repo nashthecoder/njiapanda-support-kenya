@@ -159,7 +159,7 @@ export default function Contribute() {
             transition={{ duration: 0.6 }}
           >
             <Shield className="mx-auto mb-4 h-12 w-12 opacity-80" />
-            <h1 className="font-serif text-3xl font-bold tracking-tight sm:text-4xl">
+            <h1 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
               Stand With Survivors
             </h1>
             <p className="mt-4 text-lg leading-relaxed opacity-90">

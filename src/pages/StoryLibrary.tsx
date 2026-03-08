@@ -305,8 +305,18 @@ const StoryLibrary = () => {
                     ref={i === 0 ? fontDebugRef : undefined}
                     className="story-body mb-3 text-sm leading-relaxed text-card-foreground [font-family:var(--font-serif)]"
                   >
-                    {lang === "sw" && story.swahili_text ? story.swahili_text : story.text}
+                    {(() => {
+                      if (lang === "sw") {
+                        return (simpleLanguage && story.swahili_simple) ? story.swahili_simple : (story.swahili_text || story.text);
+                      }
+                      return (simpleLanguage && story.english_simple) ? story.english_simple : story.text;
+                    })()}
                   </p>
+                  {simpleLanguage && (
+                    <p className="mb-2 text-[10px] text-muted-foreground italic">
+                      Showing simplified language
+                    </p>
+                  )}
                   {showFontDebug && i === 0 && (
                     <div className="mb-2 rounded bg-muted/60 px-2 py-1 font-mono text-[9px] text-muted-foreground">
                       font-family:{" "}

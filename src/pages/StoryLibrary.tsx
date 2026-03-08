@@ -298,21 +298,15 @@ const StoryLibrary = () => {
                     </h3>
                   )}
                   <p
-                    data-font-debug
+                    ref={i === 0 ? fontDebugRef : undefined}
                     className="story-body mb-3 text-sm leading-relaxed text-card-foreground [font-family:var(--font-serif)]"
                   >
                     {lang === "sw" && story.swahili_text ? story.swahili_text : story.text}
                   </p>
-                  {showFontDebug && (
+                  {showFontDebug && i === 0 && (
                     <div className="mb-2 rounded bg-muted/60 px-2 py-1 font-mono text-[9px] text-muted-foreground">
                       font-family:{" "}
-                      <span className="text-foreground">
-                        {typeof window !== "undefined" &&
-                          (() => {
-                            const el = document.querySelector(`[data-font-debug]`);
-                            return el ? getComputedStyle(el).fontFamily : "N/A";
-                          })()}
-                      </span>
+                      <span className="text-foreground">{computedFont || "loading..."}</span>
                     </div>
                   )}
                   {story.message && (

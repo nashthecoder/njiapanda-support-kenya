@@ -30,7 +30,6 @@ serve(async (req) => {
       success_url: `${origin}/contribute?success=true`,
       cancel_url: `${origin}/contribute?canceled=true`,
     };
-    };
 
     // If email provided, pre-fill
     if (email) {

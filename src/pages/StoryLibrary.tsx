@@ -234,7 +234,7 @@ const StoryLibrary = () => {
                 ? abuseTypeLabels[type]?.sw || type
                 : type === "All"
                 ? label("filterAll")
-                : type}
+                : abuseTypeLabels[type]?.en || type}
             </button>
           ))}
         </div>

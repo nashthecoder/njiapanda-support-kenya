@@ -123,6 +123,35 @@ const Dashboard = () => {
     );
   }
 
+  if (conductorZone === null) {
+    return (
+      <div className="min-h-screen bg-background">
+        <header className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur-md">
+          <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+            <div className="flex items-center gap-2">
+              <Shield className="h-5 w-5 text-primary" />
+              <h1 className="font-display text-lg font-semibold text-foreground">Conductor Dashboard</h1>
+            </div>
+            <button
+              onClick={async () => { await signOut(); navigate("/"); }}
+              className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+            >
+              <LogOut className="h-4 w-4" />
+              Sign out
+            </button>
+          </div>
+        </header>
+        <div className="mx-auto max-w-lg px-4 py-16 text-center">
+          <Shield className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+          <h2 className="mb-2 font-display text-xl font-semibold text-foreground">Zone not configured</h2>
+          <p className="text-sm text-muted-foreground">
+            Your zone has not been configured yet. Contact your administrator.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -131,6 +160,9 @@ const Dashboard = () => {
           <div className="flex items-center gap-2">
             <Shield className="h-5 w-5 text-primary" />
             <h1 className="font-display text-lg font-semibold text-foreground">Conductor Dashboard</h1>
+            <span className="rounded-full bg-secondary px-2.5 py-0.5 font-mono text-xs font-medium text-secondary-foreground">
+              {conductorZone} · Conductor View
+            </span>
           </div>
           <button
             onClick={async () => { await signOut(); navigate("/"); }}

@@ -15,19 +15,26 @@ serve(async (req) => {
   try {
     const payload = await req.json();
 
+    // Log sessionId for audit trail but never store it
+    console.log("sauti-complete sessionId:", payload.sessionId);
+
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    const { data, error } = await supabase.from("signals").insert({
-      urgency: payload.urgency || "medium",
-      zone: payload.zone || "unspecified",
-      resource_needed: payload.resource_needed || null,
-      source: "sauti_voice",
-      language: payload.language || "sw",
-      consent: true,
-    }).select("id").single();
+    const { data, error } = await supabase
+      .from("signals")
+      .insert({
+        urgency: payload.urgency || "medium",
+        zone: payload.zone || "unspecified",
+        resource_needed: payload.resource_needed || null,
+        source: "sauti_voice",
+        language: payload.language || "sw",
+        consent: true,
+      })
+      .select("id")
+      .single();
 
     if (error) {
       console.error("Insert error:", error);
@@ -42,10 +49,7 @@ serve(async (req) => {
     console.error("sauti-complete error:", error);
     return new Response(
       JSON.stringify({ error: error instanceof Error ? error.message : "Unknown error" }),
-      {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      }
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
 });

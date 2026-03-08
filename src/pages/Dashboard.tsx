@@ -45,27 +45,42 @@ const Dashboard = () => {
 
   const fetchData = async () => {
     setLoading(true);
+
+    // Resolve conductor's zone first
+    const { data: zoneData } = await supabase.rpc("get_conductor_zone", {
+      _user_id: user!.id,
+    });
+    const zone = zoneData as string | null;
+    setConductorZone(zone);
+
+    if (!zone) {
+      setLoading(false);
+      return;
+    }
+
     const [signalsRes, casesRes] = await Promise.all([
-      supabase.from("signals").select("*").order("created_at", { ascending: false }),
+      supabase.from("signals").select("*").eq("zone", zone).order("created_at", { ascending: false }),
       supabase.from("cases").select("*").order("updated_at", { ascending: false }),
     ]);
 
     if (signalsRes.data) setSignals(signalsRes.data);
     if (casesRes.data) {
-      // Enrich cases with their signal data
-      const enriched: CaseWithSignal[] = await Promise.all(
-        casesRes.data.map(async (c) => {
-          if (c.signal_id) {
-            const { data: sig } = await supabase
-              .from("signals")
-              .select("*")
-              .eq("id", c.signal_id)
-              .single();
-            return { ...c, signal: sig };
-          }
-          return { ...c, signal: null };
-        })
-      );
+      // Enrich cases with their signal data, then filter to zone
+      const enriched: CaseWithSignal[] = (
+        await Promise.all(
+          casesRes.data.map(async (c) => {
+            if (c.signal_id) {
+              const { data: sig } = await supabase
+                .from("signals")
+                .select("*")
+                .eq("id", c.signal_id)
+                .single();
+              return { ...c, signal: sig };
+            }
+            return { ...c, signal: null };
+          })
+        )
+      ).filter((c) => c.signal?.zone === zone);
       setCases(enriched);
     }
     setLoading(false);

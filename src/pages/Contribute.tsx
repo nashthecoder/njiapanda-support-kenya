@@ -227,7 +227,7 @@ export default function Contribute() {
                       <tier.icon className="h-6 w-6" />
                     </div>
                     <div>
-                      <CardTitle className="text-lg font-serif">{tier.title}</CardTitle>
+                      <CardTitle className="text-lg font-display">{tier.title}</CardTitle>
                       <p className="mt-0.5 font-mono text-xl font-bold text-foreground">
                         {tier.amount}
                       </p>

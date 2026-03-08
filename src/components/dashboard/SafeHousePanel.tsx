@@ -1,7 +1,7 @@
+import { Home } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
-import { Home } from "lucide-react";
 
 type SafeHouse = Tables<"safe_houses">;
 
@@ -9,6 +9,12 @@ const capacityColors: Record<string, string> = {
   available: "bg-safe/10 text-safe border-safe/30",
   limited: "bg-warning/10 text-warning border-warning/30",
   full: "bg-emergency/10 text-emergency border-emergency/30",
+};
+
+const capacityLabels: Record<string, string> = {
+  available: "Safe house capacity: available",
+  limited: "Safe house capacity: limited",
+  full: "Safe house capacity: full",
 };
 
 const SafeHousePanel = () => {
@@ -23,7 +29,6 @@ const SafeHousePanel = () => {
     };
     fetchHouses();
 
-    // Realtime subscription
     const channel = supabase
       .channel("safe-houses-live")
       .on(
@@ -49,31 +54,37 @@ const SafeHousePanel = () => {
   }, []);
 
   if (loading) {
-    return <div className="py-8 text-center text-muted-foreground">Loading safe houses…</div>;
+    return <div className="py-8 text-center text-muted-foreground" role="status">Loading safe houses…</div>;
   }
 
   if (houses.length === 0) {
     return (
       <div className="rounded-lg border border-border bg-card p-8 text-center">
-        <Home className="mx-auto mb-2 h-8 w-8 text-muted-foreground" />
+        <Home className="mx-auto mb-2 h-8 w-8 text-muted-foreground" aria-hidden="true" />
         <p className="text-muted-foreground">No safe houses registered</p>
       </div>
     );
   }
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" role="list" aria-label="Safe houses">
       {houses.map((h) => {
-        const capClass = capacityColors[h.capacity_status ?? "available"] ?? capacityColors.available;
+        const status = h.capacity_status ?? "available";
+        const capClass = capacityColors[status] ?? capacityColors.available;
         return (
           <div
             key={h.id}
+            role="listitem"
             className={`rounded-lg border p-4 shadow-sm ${capClass}`}
+            aria-label={`${h.type || "Shelter"} in ${h.zone || "unknown zone"} — ${capacityLabels[status] || status}`}
           >
             <div className="mb-2 flex items-center justify-between">
               <span className="font-semibold text-foreground">{h.type || "Shelter"}</span>
-              <span className="rounded-full bg-card px-2 py-0.5 font-mono text-xs font-medium">
-                {h.capacity_status ?? "available"}
+              <span
+                className="rounded-full bg-card px-2 py-0.5 font-mono text-xs font-medium"
+                aria-label={capacityLabels[status]}
+              >
+                {status}
               </span>
             </div>
             {h.zone && <p className="font-mono text-xs">Zone: {h.zone}</p>}

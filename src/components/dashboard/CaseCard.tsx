@@ -95,7 +95,7 @@ const CaseCard = ({ caseData, onUpdate }: CaseCardProps) => {
           {caseData.signal?.resource_needed && (
             <div className="mb-2 flex flex-wrap gap-1">
               {caseData.signal.resource_needed.split(", ").map((r) => (
-                <span key={r} className="rounded bg-accent px-2 py-0.5 text-xs text-accent-foreground">
+                <span key={r} className="rounded bg-accent px-2 py-0.5 font-mono text-xs text-accent-foreground">
                   {r}
                 </span>
               ))}

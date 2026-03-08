@@ -72,7 +72,7 @@ const SafeHousePanel = () => {
           >
             <div className="mb-2 flex items-center justify-between">
               <span className="font-semibold text-foreground">{h.type || "Shelter"}</span>
-              <span className="rounded-full bg-card px-2 py-0.5 text-xs font-medium">
+              <span className="rounded-full bg-card px-2 py-0.5 font-mono text-xs font-medium">
                 {h.capacity_status ?? "available"}
               </span>
             </div>

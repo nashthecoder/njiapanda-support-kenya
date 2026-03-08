@@ -98,6 +98,12 @@ export default function AdminUserRoles() {
     } else {
       setUserRoles((prev) => prev.filter((r) => r.id !== roleRow.id));
       toast.success(`Removed ${roleRow.role} role`);
+      await supabase.from("audit_log" as any).insert({
+        action: "remove_role",
+        entity_type: "role",
+        entity_id: roleRow.user_id,
+        details: { role: roleRow.role },
+      });
     }
   };
 

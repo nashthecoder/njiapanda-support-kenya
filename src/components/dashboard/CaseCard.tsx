@@ -78,7 +78,7 @@ const CaseCard = ({ caseData, onUpdate }: CaseCardProps) => {
         <div className="flex-1">
           <div className="mb-2 flex flex-wrap items-center gap-2">
             {caseData.signal && <UrgencyBadge urgency={caseData.signal.urgency} />}
-            <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${statusColor[caseData.status ?? "open"]}`}>
+            <span className={`rounded-full px-2 py-0.5 font-mono text-xs font-semibold ${statusColor[caseData.status ?? "open"]}`}>
               {caseData.status?.replace("_", " ") ?? "open"}
             </span>
             {caseData.risk_level && (

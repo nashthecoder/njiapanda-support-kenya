@@ -153,7 +153,7 @@ const CaseCard = ({ caseData, onUpdate }: CaseCardProps) => {
           </h4>
           <div className="grid grid-cols-2 gap-3 text-xs">
             <div>
-              <span className="text-muted-foreground">Risk Level</span>
+              <span className="font-mono text-muted-foreground">Risk Level</span>
               <p className="font-semibold text-foreground">{aiBrief.risk_level}</p>
             </div>
             <div>

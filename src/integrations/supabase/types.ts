@@ -319,7 +319,9 @@ export type Database = {
           consent: boolean | null
           created_at: string
           id: string
+          language: string | null
           resource_needed: string | null
+          source: string | null
           urgency: string
           zone: string | null
         }
@@ -327,7 +329,9 @@ export type Database = {
           consent?: boolean | null
           created_at?: string
           id?: string
+          language?: string | null
           resource_needed?: string | null
+          source?: string | null
           urgency?: string
           zone?: string | null
         }
@@ -335,7 +339,9 @@ export type Database = {
           consent?: boolean | null
           created_at?: string
           id?: string
+          language?: string | null
           resource_needed?: string | null
+          source?: string | null
           urgency?: string
           zone?: string | null
         }

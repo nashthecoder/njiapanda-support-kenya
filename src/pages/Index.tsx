@@ -40,6 +40,13 @@ const quickActions = [
     path: "/helpline",
     color: "bg-emergency/10 text-emergency",
   },
+  {
+    icon: Mic,
+    title: "Speak to Us",
+    description: "Voice support — ongea nasi",
+    path: "/sauti",
+    color: "bg-[#C4871A]/10 text-[#C4871A]",
+  },
 ];
 
 const Index = () => {

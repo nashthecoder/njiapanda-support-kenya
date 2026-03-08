@@ -54,6 +54,7 @@ function AppInner() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/why" element={<WhyNjiapanda />} />
+        <Route path="/sauti" element={<Sauti />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <BottomNav />

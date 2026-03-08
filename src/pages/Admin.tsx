@@ -102,8 +102,9 @@ export default function Admin() {
         {tab === "overview" && <AdminOverview onNavigate={(t) => setTab(t as TabId)} />}
         {tab === "conductors" && <AdminConductors />}
         {tab === "stories" && <AdminStories />}
+        {tab === "feedback" && <AdminFeedback />}
         {tab === "alerts" && <AdminAlerts />}
-        {!["overview", "conductors", "stories", "alerts"].includes(tab) && (
+        {!["overview", "conductors", "stories", "feedback", "alerts"].includes(tab) && (
           <div className="flex h-full items-center justify-center">
             <p className="text-muted-foreground">
               {NAV_ITEMS.find((n) => n.id === tab)?.label} — coming soon.

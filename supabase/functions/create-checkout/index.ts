@@ -22,11 +22,14 @@ serve(async (req) => {
       throw new Error("priceId and mode are required");
     }
 
+    const origin = req.headers.get("origin") || "https://njiapanda-support-kenya.lovable.app";
+
     const sessionParams: any = {
       line_items: [{ price: priceId, quantity: 1 }],
       mode,
-      success_url: `${req.headers.get("origin")}/contribute?success=true`,
-      cancel_url: `${req.headers.get("origin")}/contribute?canceled=true`,
+      success_url: `${origin}/contribute?success=true`,
+      cancel_url: `${origin}/contribute?canceled=true`,
+    };
     };
 
     // If email provided, pre-fill

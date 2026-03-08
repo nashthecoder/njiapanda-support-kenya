@@ -171,7 +171,7 @@ const CaseCard = ({ caseData, onUpdate }: CaseCardProps) => {
               </div>
             </div>
             <div>
-              <span className="text-muted-foreground">Suggested Resources</span>
+              <span className="font-mono text-muted-foreground">Suggested Resources</span>
               <div className="mt-1 flex flex-wrap gap-1">
                 {aiBrief.suggested_resources.map((r) => (
                   <span key={r} className="rounded bg-safe/10 px-1.5 py-0.5 text-[11px] text-safe">{r}</span>

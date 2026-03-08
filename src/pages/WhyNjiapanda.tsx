@@ -191,9 +191,14 @@ That moment of recognition — that is where Njiapanda begins.`}
             <p>
               If you are building something similar, or want to adapt this for your context, the repository is open. Fork it. Localise it. Make it yours.
             </p>
-            <p className="text-ochre font-semibold">
-              → github.com/[REPO URL]
-            </p>
+            <a
+              href="https://github.com/nashthecoder/njiapanda-support-kenya"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ochre font-semibold hover:underline"
+            >
+              → github.com/nashthecoder/njiapanda-support-kenya
+            </a>
           </Body>
         </motion.div>
       </section>

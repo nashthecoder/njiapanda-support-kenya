@@ -1,4 +1,4 @@
-import { Shield, MessageCircle, Phone, MapPin, Radio } from "lucide-react";
+import { Shield, MessageCircle, Phone, MapPin, Radio, Mic } from "lucide-react";
 import heroImage from "@/assets/njiapanda_hero.png";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -39,6 +39,13 @@ const quickActions = [
     description: "Call 1195 or reach GBV hotlines",
     path: "/helpline",
     color: "bg-emergency/10 text-emergency",
+  },
+  {
+    icon: Mic,
+    title: "Speak to Us",
+    description: "Voice support — ongea nasi",
+    path: "/sauti",
+    color: "bg-[#C4871A]/10 text-[#C4871A]",
   },
 ];
 

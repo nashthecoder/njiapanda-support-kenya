@@ -223,6 +223,11 @@ const Dashboard = () => {
                     <div className="flex-1">
                       <div className="mb-2 flex flex-wrap items-center gap-2">
                         <UrgencyBadge urgency={signal.urgency} />
+                        {(signal as any).source === "sauti_voice" && (
+                          <span className="rounded-full bg-[#C4871A]/10 px-2 py-0.5 font-mono text-xs font-semibold text-[#C4871A]">
+                            🎙️ Voice
+                          </span>
+                        )}
                         {signal.zone && (
                           <span className="rounded-full bg-secondary px-2 py-0.5 font-mono text-xs text-secondary-foreground">
                             {signal.zone}

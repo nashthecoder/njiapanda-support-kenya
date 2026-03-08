@@ -22,6 +22,7 @@ import JoinNetwork from "./pages/JoinNetwork";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 import WhyNjiapanda from "./pages/WhyNjiapanda";
+import Sauti from "./pages/Sauti";
 import NotFound from "./pages/NotFound";
 import EmergencyExitButton from "./components/EmergencyExitButton";
 import BottomNav from "./components/BottomNav";
@@ -53,6 +54,7 @@ function AppInner() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/why" element={<WhyNjiapanda />} />
+        <Route path="/sauti" element={<Sauti />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <BottomNav />

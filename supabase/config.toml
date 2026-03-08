@@ -20,3 +20,9 @@ verify_jwt = false
 
 [functions.notify-feedback]
 verify_jwt = false
+
+[functions.sauti-session]
+verify_jwt = false
+
+[functions.sauti-complete]
+verify_jwt = false

@@ -157,7 +157,7 @@ const CaseCard = ({ caseData, onUpdate }: CaseCardProps) => {
               <p className="font-semibold text-foreground">{aiBrief.risk_level}</p>
             </div>
             <div>
-              <span className="text-muted-foreground">Safety Concern</span>
+              <span className="font-mono text-muted-foreground">Safety Concern</span>
               <p className={`font-semibold ${aiBrief.immediate_safety_concern ? "text-emergency" : "text-safe"}`}>
                 {aiBrief.immediate_safety_concern ? "⚠ Immediate" : "✓ No immediate danger"}
               </p>

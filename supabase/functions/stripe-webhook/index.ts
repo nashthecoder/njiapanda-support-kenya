@@ -4,7 +4,8 @@ import { createClient } from "npm:@supabase/supabase-js@2.57.2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
 serve(async (req) => {
@@ -20,15 +21,15 @@ serve(async (req) => {
     const body = await req.text();
     const sig = req.headers.get("stripe-signature");
 
-    // If webhook secret is set, verify signature
     const webhookSecret = Deno.env.get("STRIPE_WEBHOOK_SECRET");
-    let event: Stripe.Event;
-
-    if (webhookSecret && sig) {
-      event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
-    } else {
-      event = JSON.parse(body);
+    if (!webhookSecret) {
+      throw new Error("STRIPE_WEBHOOK_SECRET is not configured");
     }
+    if (!sig) {
+      throw new Error("Missing stripe-signature header");
+    }
+
+    const event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
 
     console.log(`[STRIPE-WEBHOOK] Event type: ${event.type}`);
 
@@ -38,8 +39,6 @@ serve(async (req) => {
     ) {
       const session = event.data.object as any;
       const amountTotal = session.amount_total || session.amount_paid || 0;
-      // amount is in minor units (cents for KES = KES itself since KES has no subunits... 
-      // but Stripe treats KES as having 2 decimal places)
       const amountKES = Math.round(amountTotal / 100);
 
       if (amountKES > 0) {

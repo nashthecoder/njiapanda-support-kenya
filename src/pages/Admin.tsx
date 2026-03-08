@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import {
   BarChart3, Users, BookOpen, Shield, MapPin, Home, Bell, ClipboardList,
-  LogOut, Radio, MessageSquarePlus,
+  LogOut, Radio, MessageSquarePlus, Handshake,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminOverview from "@/components/admin/AdminOverview";
@@ -11,6 +11,7 @@ import AdminConductors from "@/components/admin/AdminConductors";
 import AdminStories from "@/components/admin/AdminStories";
 import AdminAlerts from "@/components/admin/AdminAlerts";
 import AdminFeedback from "@/components/admin/AdminFeedback";
+import AdminPartners from "@/components/admin/AdminPartners";
 
 const NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: BarChart3, ready: true },
@@ -18,6 +19,7 @@ const NAV_ITEMS = [
   { id: "conductors", label: "Conductors", icon: Users, ready: true },
   { id: "stories", label: "Stories", icon: BookOpen, ready: true },
   { id: "feedback", label: "Feedback", icon: MessageSquarePlus, ready: true },
+  { id: "partners", label: "Partners", icon: Handshake, ready: true },
   { id: "resources", label: "Resources", icon: MapPin, ready: false },
   { id: "safehouses", label: "Safe Houses", icon: Home, ready: false },
   { id: "alerts", label: "Alerts", icon: Bell, ready: true },
@@ -103,8 +105,9 @@ export default function Admin() {
         {tab === "conductors" && <AdminConductors />}
         {tab === "stories" && <AdminStories />}
         {tab === "feedback" && <AdminFeedback />}
+        {tab === "partners" && <AdminPartners />}
         {tab === "alerts" && <AdminAlerts />}
-        {!["overview", "conductors", "stories", "feedback", "alerts"].includes(tab) && (
+        {!["overview", "conductors", "stories", "feedback", "partners", "alerts"].includes(tab) && (
           <div className="flex h-full items-center justify-center">
             <p className="text-muted-foreground">
               {NAV_ITEMS.find((n) => n.id === tab)?.label} — coming soon.

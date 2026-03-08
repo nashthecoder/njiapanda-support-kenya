@@ -87,10 +87,14 @@ const StoryLibrary = () => {
       query = query.eq("abuse_type", filter);
     }
 
+    if (searchQuery.trim()) {
+      query = query.ilike("text", `%${searchQuery.trim()}%`);
+    }
+
     const { data, error } = await query;
     if (!error && data) setStories(data);
     setLoading(false);
-  }, [filter]);
+  }, [filter, searchQuery]);
 
   useEffect(() => {
     fetchStories();

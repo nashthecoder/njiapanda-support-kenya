@@ -149,7 +149,7 @@ const CaseCard = ({ caseData, onUpdate }: CaseCardProps) => {
         <div className="border-t border-border bg-secondary/30 p-4">
           <h4 className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-foreground">
             <Sparkles className="h-3.5 w-3.5 text-primary" /> AI Risk Assessment
-            <span className="ml-auto text-[10px] font-normal text-muted-foreground">Session only — not stored</span>
+            <span className="ml-auto font-mono text-[10px] font-normal text-muted-foreground">Session only — not stored</span>
           </h4>
           <div className="grid grid-cols-2 gap-3 text-xs">
             <div>

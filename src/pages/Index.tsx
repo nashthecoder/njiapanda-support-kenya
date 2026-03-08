@@ -1,4 +1,4 @@
-import { Shield, MessageCircle, Phone, MapPin, Radio } from "lucide-react";
+import { Shield, MessageCircle, Phone, MapPin, Radio, Mic } from "lucide-react";
 import heroImage from "@/assets/njiapanda_hero.png";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";

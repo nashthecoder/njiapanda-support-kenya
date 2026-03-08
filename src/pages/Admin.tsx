@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import {
   BarChart3, Users, BookOpen, Shield, MapPin, Home, Bell, ClipboardList,
-  LogOut, Radio, MessageSquarePlus,
+  LogOut, Radio, MessageSquarePlus, Handshake,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminOverview from "@/components/admin/AdminOverview";

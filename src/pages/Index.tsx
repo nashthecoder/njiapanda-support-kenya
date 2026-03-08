@@ -1,10 +1,16 @@
-import { Button } from "@/components/ui/button";
-import { Shield, MessageCircle, Phone, MapPin } from "lucide-react";
+import { Shield, MessageCircle, Phone, MapPin, Radio } from "lucide-react";
 import heroImage from "@/assets/njiapanda_hero.png";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const quickActions = [
+  {
+    icon: Radio,
+    title: "Quiet Help Signal",
+    description: "Anonymous, no login — send a silent alert",
+    path: "/signal",
+    color: "bg-warning/10 text-warning",
+  },
   {
     icon: MessageCircle,
     title: "Share Your Story",

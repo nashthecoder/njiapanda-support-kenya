@@ -269,9 +269,19 @@ const StoryLibrary = () => {
                         : abuseTypeLabels[story.abuse_type]?.en || story.abuse_type}
                     </Badge>
                   )}
+                  {story.title && (
+                    <h3 className="mb-2 font-display text-base font-semibold text-foreground">
+                      {story.title}
+                    </h3>
+                  )}
                   <p className="mb-3 text-sm leading-relaxed text-card-foreground">
-                    {story.text}
+                    {lang === "sw" && story.swahili_text ? story.swahili_text : story.text}
                   </p>
+                  {story.message && (
+                    <p className="mb-3 rounded-md bg-primary/5 px-3 py-2 text-xs italic leading-relaxed text-primary">
+                      💚 {story.message}
+                    </p>
+                  )}
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleResonate(story.id)}

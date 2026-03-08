@@ -2,90 +2,125 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap');
 
 @layer base {
   :root {
-    --background: 180 20% 98%;
-    --foreground: 180 30% 10%;
+    /* ── Mapped from Njiapanda Design Tokens v1.0 ── */
 
-    --card: 0 0% 100%;
-    --card-foreground: 180 30% 10%;
+    --background: 36 33% 95%;       /* cream #F7F3ED */
+    --foreground: 30 18% 9%;        /* ink #1A1612 */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 180 30% 10%;
+    --card: 34 64% 97%;             /* paper #FDFAF6 */
+    --card-foreground: 30 18% 9%;   /* ink */
 
-    --primary: 174 62% 38%;
+    --popover: 34 64% 97%;          /* paper */
+    --popover-foreground: 30 18% 9%;
+
+    --primary: 168 53% 24%;         /* forest #1C5C4F */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 174 30% 92%;
-    --secondary-foreground: 174 62% 25%;
+    --secondary: 162 33% 94%;       /* forest-bg #EAF4F1 */
+    --secondary-foreground: 168 61% 15%; /* forest-dk #0F3D34 */
 
-    --muted: 174 15% 94%;
-    --muted-foreground: 180 10% 45%;
+    --muted: 36 33% 95%;            /* cream */
+    --muted-foreground: 26 9% 44%;  /* stone #7A6E65 */
 
-    --accent: 174 40% 88%;
-    --accent-foreground: 174 62% 20%;
+    --accent: 40 88% 95%;           /* ochre-bg #FDF6E8 */
+    --accent-foreground: 39 82% 30%; /* ochre-dk #8A5C0E */
 
-    --destructive: 0 84% 60%;
+    --destructive: 5 63% 46%;       /* emergency #C0392B */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 174 20% 88%;
-    --input: 174 20% 88%;
-    --ring: 174 62% 38%;
+    --border: 30 8% 69%;            /* dust #B8AFA6 */
+    --input: 30 8% 82%;             /* lighter dust */
+    --ring: 168 53% 24%;            /* forest */
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;               /* 8px = radius-lg */
 
-    --emergency: 0 84% 60%;
+    --emergency: 5 63% 46%;         /* #C0392B */
     --emergency-foreground: 0 0% 100%;
 
-    --safe: 145 63% 42%;
+    --safe: 168 50% 36%;            /* #2D8A77 */
     --safe-foreground: 0 0% 100%;
 
-    --warning: 38 92% 50%;
+    --warning: 37 91% 44%;          /* #D4860A */
     --warning-foreground: 0 0% 100%;
 
-    --sidebar-background: 174 30% 97%;
-    --sidebar-foreground: 180 30% 10%;
-    --sidebar-primary: 174 62% 38%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 174 30% 92%;
-    --sidebar-accent-foreground: 174 62% 20%;
-    --sidebar-border: 174 20% 88%;
-    --sidebar-ring: 174 62% 38%;
+    --info: 200 20% 45%;            /* #5A7A8A */
+    --info-foreground: 0 0% 100%;
 
-    --font-display: 'Playfair Display', serif;
-    --font-body: 'DM Sans', sans-serif;
+    /* ── Extended palette ── */
+    --forest-dk: 168 61% 15%;
+    --forest: 168 53% 24%;
+    --forest-lt: 168 50% 36%;
+    --forest-bg: 162 33% 94%;
+
+    --ochre-dk: 39 82% 30%;
+    --ochre: 38 77% 44%;
+    --ochre-lt: 37 80% 57%;
+    --ochre-bg: 40 88% 95%;
+
+    --ink: 30 18% 9%;
+    --charcoal: 23 12% 21%;
+    --stone: 26 9% 44%;
+    --dust: 30 8% 69%;
+    --cream: 36 33% 95%;
+    --paper: 34 64% 97%;
+
+    --sidebar-background: 34 64% 97%;
+    --sidebar-foreground: 30 18% 9%;
+    --sidebar-primary: 168 53% 24%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 162 33% 94%;
+    --sidebar-accent-foreground: 168 61% 15%;
+    --sidebar-border: 30 8% 69%;
+    --sidebar-ring: 168 53% 24%;
+
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --font-mono: 'DM Mono', 'Courier New', monospace;
+
+    /* ── Shadows ── */
+    --shadow-sm: 0 1px 3px rgba(26,22,18,0.08);
+    --shadow-md: 0 4px 16px rgba(26,22,18,0.12);
+    --shadow-lg: 0 12px 40px rgba(26,22,18,0.16);
   }
 
   .dark {
-    --background: 180 20% 6%;
-    --foreground: 174 15% 92%;
-    --card: 180 20% 9%;
-    --card-foreground: 174 15% 92%;
-    --popover: 180 20% 9%;
-    --popover-foreground: 174 15% 92%;
-    --primary: 174 62% 45%;
+    --background: 30 15% 7%;
+    --foreground: 36 20% 90%;
+    --card: 30 12% 10%;
+    --card-foreground: 36 20% 90%;
+    --popover: 30 12% 10%;
+    --popover-foreground: 36 20% 90%;
+    --primary: 168 50% 36%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 174 30% 15%;
-    --secondary-foreground: 174 30% 90%;
-    --muted: 180 15% 14%;
-    --muted-foreground: 174 10% 60%;
-    --accent: 174 30% 18%;
-    --accent-foreground: 174 30% 90%;
-    --destructive: 0 62% 30%;
+    --secondary: 168 30% 15%;
+    --secondary-foreground: 162 30% 88%;
+    --muted: 30 10% 14%;
+    --muted-foreground: 26 8% 58%;
+    --accent: 38 40% 18%;
+    --accent-foreground: 37 70% 70%;
+    --destructive: 5 55% 35%;
     --destructive-foreground: 0 0% 100%;
-    --border: 174 20% 18%;
-    --input: 174 20% 18%;
-    --ring: 174 62% 45%;
-    --sidebar-background: 180 20% 8%;
-    --sidebar-foreground: 174 15% 92%;
-    --sidebar-primary: 174 62% 45%;
+    --border: 30 8% 22%;
+    --input: 30 8% 22%;
+    --ring: 168 50% 36%;
+    --emergency: 5 55% 40%;
+    --emergency-foreground: 0 0% 100%;
+    --safe: 168 45% 32%;
+    --safe-foreground: 0 0% 100%;
+    --warning: 37 80% 40%;
+    --warning-foreground: 0 0% 100%;
+    --sidebar-background: 30 12% 9%;
+    --sidebar-foreground: 36 20% 90%;
+    --sidebar-primary: 168 50% 36%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 174 30% 15%;
-    --sidebar-accent-foreground: 174 30% 90%;
-    --sidebar-border: 174 20% 18%;
-    --sidebar-ring: 174 62% 45%;
+    --sidebar-accent: 168 30% 15%;
+    --sidebar-accent-foreground: 162 30% 88%;
+    --sidebar-border: 30 8% 22%;
+    --sidebar-ring: 168 50% 36%;
   }
 }
 
@@ -101,5 +136,6 @@
 
   h1, h2, h3 {
     font-family: var(--font-display);
+    font-weight: 600;
   }
 }

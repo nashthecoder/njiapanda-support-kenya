@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Playfair Display", "serif"],
-        body: ["DM Sans", "sans-serif"],
+        display: ["Cormorant Garamond", "Georgia", "serif"],
+        body: ["DM Sans", "system-ui", "sans-serif"],
+        mono: ["DM Mono", "Courier New", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -63,6 +64,29 @@ export default {
           DEFAULT: "hsl(var(--warning))",
           foreground: "hsl(var(--warning-foreground))",
         },
+        info: {
+          DEFAULT: "hsl(var(--info))",
+          foreground: "hsl(var(--info-foreground))",
+        },
+        // Extended palette
+        forest: {
+          dk: "hsl(var(--forest-dk))",
+          DEFAULT: "hsl(var(--forest))",
+          lt: "hsl(var(--forest-lt))",
+          bg: "hsl(var(--forest-bg))",
+        },
+        ochre: {
+          dk: "hsl(var(--ochre-dk))",
+          DEFAULT: "hsl(var(--ochre))",
+          lt: "hsl(var(--ochre-lt))",
+          bg: "hsl(var(--ochre-bg))",
+        },
+        ink: "hsl(var(--ink))",
+        charcoal: "hsl(var(--charcoal))",
+        stone: "hsl(var(--stone))",
+        dust: "hsl(var(--dust))",
+        cream: "hsl(var(--cream))",
+        paper: "hsl(var(--paper))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -78,6 +102,11 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        sm: "var(--shadow-sm)",
+        md: "var(--shadow-md)",
+        lg: "var(--shadow-lg)",
       },
       keyframes: {
         "accordion-down": {

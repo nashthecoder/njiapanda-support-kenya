@@ -90,6 +90,7 @@ const Dashboard = () => {
     const { error } = await supabase.from("cases").insert({
       signal_id: signal.id,
       conductor_id: user?.id,
+      zone: signal.zone ?? conductorZone,
       status: "open",
       risk_level: signal.urgency === "emergency" ? "high" : signal.urgency === "urgent" ? "medium" : "low",
     });

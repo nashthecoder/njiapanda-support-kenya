@@ -1,4 +1,4 @@
-import { Home, BookOpen, MessageCircle, Shield, Phone, MapPin } from "lucide-react";
+import { Home, BookOpen, Shield, Phone, MapPin, Handshake } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 

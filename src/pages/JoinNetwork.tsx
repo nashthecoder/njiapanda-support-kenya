@@ -115,7 +115,7 @@ export default function JoinNetwork() {
 
   const handleLaneClick = (target: LaneTarget) => {
     if (target === "contribute") {
-      navigate("/contribute");
+      window.open("/contribute", "_blank", "noopener");
       return;
     }
     const next = openLane === target ? null : target;

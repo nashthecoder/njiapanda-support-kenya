@@ -263,7 +263,7 @@ const StoryLibrary = () => {
                   className="rounded-lg border border-border bg-card p-4 shadow-sm"
                 >
                   {story.abuse_type && (
-                    <Badge variant="secondary" className="mb-2 text-xs">
+                    <Badge variant="secondary" className="mb-2 font-mono text-xs">
                       {lang === "sw"
                         ? abuseTypeLabels[story.abuse_type]?.sw || story.abuse_type
                         : abuseTypeLabels[story.abuse_type]?.en || story.abuse_type}

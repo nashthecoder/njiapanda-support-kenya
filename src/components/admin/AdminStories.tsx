@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { Check, X, Edit3 } from "lucide-react";
+import { Check, X, Edit3, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
 
 type Story = {

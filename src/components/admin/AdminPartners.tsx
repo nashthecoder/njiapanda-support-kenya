@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CheckCircle2, Users, MapPin, Plug } from "lucide-react";
+import { CheckCircle2, Users, MapPin, Plug, User, Mail, Phone } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 type Expression = {

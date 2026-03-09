@@ -83,7 +83,7 @@ const lanes = [
     formHeading: "Let's connect your system",
   },
   {
-    icon: Heart,
+    icon: DollarSign,
     heading: "Fund the Network",
     text: "Every contribution funds something specific — conductor training, safe house capacity, or platform sustainability. Njiapanda is open source and community-funded. If your organisation has a CSR programme, grant budget, or wants to sponsor a pilot zone, get in touch.",
     button: "Support the Network",

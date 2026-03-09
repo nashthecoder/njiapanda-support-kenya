@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Users, MapPin, Plug, Heart, CheckCircle2, ChevronDown } from "lucide-react";
+import { Users, MapPin, Plug, DollarSign, CheckCircle2, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

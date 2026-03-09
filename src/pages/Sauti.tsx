@@ -392,11 +392,15 @@ const Sauti = () => {
             onClick={() => {
               if (state === "idle") setState("consent");
               else if (state === "listening") stopSession();
+              else if (state === "mic-error") setState("consent");
             }}
             className="relative flex h-20 w-20 items-center justify-center rounded-full transition-transform active:scale-95"
             style={{ minWidth: 80, minHeight: 80 }}
             whileTap={{ scale: 0.92 }}
-            aria-label={state === "idle" ? t("tapToSpeak") : t("tapToEnd")}
+            aria-label={
+              state === "mic-error" ? t("tryAgain") : 
+              state === "idle" ? t("tapToSpeak") : t("tapToEnd")
+            }
           >
             {/* Rings */}
             {state === "idle" && (

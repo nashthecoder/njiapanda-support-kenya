@@ -387,7 +387,7 @@ const Sauti = () => {
       {/* Main interaction area */}
       <div className="flex flex-col items-center gap-6">
         {/* Mic button */}
-        {(state === "idle" || state === "listening") && (
+        {(state === "idle" || state === "listening" || state === "mic-error") && (
           <motion.button
             onClick={() => {
               if (state === "idle") setState("consent");

@@ -47,6 +47,7 @@ const Sauti = () => {
   const wsRef = useRef<WebSocket | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const sessionIdRef = useRef<string>("");
+  const audioOutCtxRef = useRef<AudioContext | null>(null);
   const transcriptEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -62,6 +63,7 @@ const Sauti = () => {
     return () => {
       wsRef.current?.close();
       streamRef.current?.getTracks().forEach((t) => t.stop());
+      audioOutCtxRef.current?.close().catch(() => {});
     };
   }, []);
 
@@ -79,12 +81,49 @@ const Sauti = () => {
     return btoa(binary);
   };
 
-  /** Play base64-encoded audio chunk from Gemini */
-  const playAudioChunk = (base64: string) => {
-    const binary = atob(base64);
-    const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-    const blob = new Blob([bytes], { type: "audio/wav" });
+  const bytesFromBase64 = (base64: string) =>
+    Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
+
+  const getOutCtx = (sampleRate: number) => {
+    const ctx = audioOutCtxRef.current;
+    if (!ctx || ctx.sampleRate !== sampleRate) {
+      ctx?.close().catch(() => {});
+      audioOutCtxRef.current = new AudioContext({ sampleRate });
+    }
+    return audioOutCtxRef.current!;
+  };
+
+  /** Play base64-encoded audio chunk from Vertex */
+  const playAudioChunk = (base64: string, mimeType?: string) => {
+    const type = mimeType ?? "audio/wav";
+
+    // Vertex often returns raw PCM: "audio/pcm;rate=24000".
+    if (type.includes("audio/pcm")) {
+      const rate = Number(type.match(/rate=(\d+)/)?.[1] ?? 24000);
+      const ctx = getOutCtx(rate);
+      ctx.resume().catch(() => {});
+
+      const bytes = bytesFromBase64(base64);
+      const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+      const frameCount = Math.floor(bytes.byteLength / 2);
+      const float32 = new Float32Array(frameCount);
+      for (let i = 0; i < frameCount; i++) {
+        const s = view.getInt16(i * 2, true);
+        float32[i] = s / 32768;
+      }
+
+      const buffer = ctx.createBuffer(1, float32.length, rate);
+      buffer.copyToChannel(float32, 0);
+      const src = ctx.createBufferSource();
+      src.buffer = buffer;
+      src.connect(ctx.destination);
+      src.start();
+      return;
+    }
+
+    // Fallback (e.g. audio/wav)
+    const bytes = bytesFromBase64(base64);
+    const blob = new Blob([bytes], { type });
     const url = URL.createObjectURL(blob);
     const audio = new Audio(url);
     audio.play().catch(() => {});
@@ -99,7 +138,9 @@ const Sauti = () => {
         const parsed = JSON.parse(match[0]);
         if (parsed.urgency) return parsed;
       }
-    } catch { /* not json yet */ }
+    } catch {
+      /* not json yet */
+    }
     return null;
   };
 

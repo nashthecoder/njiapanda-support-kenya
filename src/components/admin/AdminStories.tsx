@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { Check, X, Edit3 } from "lucide-react";
+import { Check, X, Edit3, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
 
 type Story = {
@@ -93,7 +93,8 @@ export default function AdminStories() {
       ) : stories.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center text-muted-foreground">
-            No stories pending moderation. 🎉
+            <PartyPopper className="mx-auto mb-2 h-8 w-8 text-primary" />
+            No stories pending moderation.
           </CardContent>
         </Card>
       ) : (

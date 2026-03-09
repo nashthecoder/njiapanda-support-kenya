@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CheckCircle2, Users, MapPin, Plug } from "lucide-react";
+import { CheckCircle2, Users, MapPin, Plug, User, Mail, Phone } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 type Expression = {
@@ -139,10 +139,10 @@ export default function AdminPartners() {
                   </div>
                 </div>
                 <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs text-muted-foreground">
-                  {row.zone && <span>📍 {row.zone}</span>}
-                  {row.role && <span>👤 {row.role}</span>}
-                  {row.contact_email && <span>✉ {row.contact_email}</span>}
-                  {row.contact_phone && <span>📞 {row.contact_phone}</span>}
+                  {row.zone && <span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {row.zone}</span>}
+                  {row.role && <span className="flex items-center gap-1"><User className="h-3 w-3" /> {row.role}</span>}
+                  {row.contact_email && <span className="flex items-center gap-1"><Mail className="h-3 w-3" /> {row.contact_email}</span>}
+                  {row.contact_phone && <span className="flex items-center gap-1"><Phone className="h-3 w-3" /> {row.contact_phone}</span>}
                 </div>
                 {row.message && (
                   <p className="mt-2 text-sm text-muted-foreground bg-muted/50 rounded p-2">

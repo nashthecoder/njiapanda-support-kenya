@@ -226,7 +226,7 @@ const Sauti = () => {
           if (msg.serverContent?.modelTurn?.parts) {
             msg.serverContent.modelTurn.parts.forEach((part: any) => {
               if (part.inlineData?.mimeType?.includes("audio")) {
-                playAudioChunk(part.inlineData.data);
+                playAudioChunk(part.inlineData.data, part.inlineData.mimeType);
               }
               if (part.text) {
                 setTranscript((prev) => [...prev, { speaker: "Sauti", text: part.text }]);

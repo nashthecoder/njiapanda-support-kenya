@@ -222,7 +222,7 @@ const Sauti = () => {
             streamAudioToWs(stream, ws);
           })
           .catch(() => {
-            setState("idle");
+            setState("mic-error");
             ws.close();
           });
       };

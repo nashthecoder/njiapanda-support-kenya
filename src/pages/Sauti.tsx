@@ -10,7 +10,7 @@ import {
   EMERGENCY_MSG,
 } from "@/components/sauti/sautiPrompts";
 
-type SautiState = "idle" | "consent" | "connecting" | "listening" | "processing" | "ended";
+type SautiState = "idle" | "consent" | "connecting" | "listening" | "processing" | "ended" | "mic-error";
 type Lang = "sw" | "en";
 
 const labels: Record<string, Record<Lang, string>> = {
@@ -30,6 +30,15 @@ const labels: Record<string, Record<Lang, string>> = {
     sw: "Sauti inakusikiliza wakati halisi.\nHakuna rekodi inayohifadhiwa.\nMazungumzo yako yanakusaidia kupata msaada.\nUnaweza kusimama wakati wowote.",
   },
   consentBtn: { en: "I understand — start", sw: "Naelewa — anza" },
+  micError: { 
+    en: "Microphone access is needed to use Sauti", 
+    sw: "Unahitaji ufikiaji wa kipaza sauti kutumia Sauti" 
+  },
+  micErrorBody: {
+    en: "Please allow microphone access in your browser to continue.\nYou may need to click the microphone icon in your address bar.",
+    sw: "Tafadhali ruhusu ufikiaji wa kipaza sauti kwenye kivinjari chako kuendelea.\nHuenda ukahitaji kubonyeza ikoni ya kipaza sauti kwenye upau wa anwani."
+  },
+  tryAgain: { en: "Try again", sw: "Jaribu tena" },
 };
 
 const handleExit = () => {
@@ -213,7 +222,7 @@ const Sauti = () => {
             streamAudioToWs(stream, ws);
           })
           .catch(() => {
-            setState("idle");
+            setState("mic-error");
             ws.close();
           });
       };
@@ -378,16 +387,20 @@ const Sauti = () => {
       {/* Main interaction area */}
       <div className="flex flex-col items-center gap-6">
         {/* Mic button */}
-        {(state === "idle" || state === "listening") && (
+        {(state === "idle" || state === "listening" || state === "mic-error") && (
           <motion.button
             onClick={() => {
               if (state === "idle") setState("consent");
               else if (state === "listening") stopSession();
+              else if (state === "mic-error") setState("consent");
             }}
             className="relative flex h-20 w-20 items-center justify-center rounded-full transition-transform active:scale-95"
             style={{ minWidth: 80, minHeight: 80 }}
             whileTap={{ scale: 0.92 }}
-            aria-label={state === "idle" ? t("tapToSpeak") : t("tapToEnd")}
+            aria-label={
+              state === "mic-error" ? t("tryAgain") : 
+              state === "idle" ? t("tapToSpeak") : t("tapToEnd")
+            }
           >
             {/* Rings */}
             {state === "idle" && (
@@ -405,11 +418,15 @@ const Sauti = () => {
             )}
             <span
               className={`relative flex h-16 w-16 items-center justify-center rounded-full ${
-                state === "listening" ? "bg-emergency/20" : "bg-[#C4871A]/15"
+                state === "listening" ? "bg-emergency/20" : 
+                state === "mic-error" ? "bg-emergency/10" :
+                "bg-[#C4871A]/15"
               }`}
             >
               {state === "listening" ? (
                 <MicOff className="h-8 w-8 text-emergency" />
+              ) : state === "mic-error" ? (
+                <MicOff className="h-8 w-8 text-emergency/60" />
               ) : (
                 <Mic className="h-8 w-8" style={{ color: "#C4871A" }} />
               )}
@@ -467,6 +484,17 @@ const Sauti = () => {
           <div className="text-center">
             <p className="font-sans text-sm text-white/70">{t("listening")}</p>
             <p className="mt-1 font-sans text-xs text-white/30">{t("tapToEnd")}</p>
+          </div>
+        )}
+        {state === "mic-error" && (
+          <div className="text-center max-w-xs">
+            <p className="font-display text-sm font-semibold text-emergency mb-2">{t("micError")}</p>
+            <p className="font-sans text-xs text-white/60 whitespace-pre-line leading-relaxed mb-3">
+              {t("micErrorBody")}
+            </p>
+            <p className="font-sans text-xs" style={{ color: "#C4871A" }}>
+              {t("tryAgain")}
+            </p>
           </div>
         )}
       </div>

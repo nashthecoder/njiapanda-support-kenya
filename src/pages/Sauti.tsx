@@ -10,7 +10,7 @@ import {
   EMERGENCY_MSG,
 } from "@/components/sauti/sautiPrompts";
 
-type SautiState = "idle" | "consent" | "connecting" | "listening" | "processing" | "ended";
+type SautiState = "idle" | "consent" | "connecting" | "listening" | "processing" | "ended" | "mic-error";
 type Lang = "sw" | "en";
 
 const labels: Record<string, Record<Lang, string>> = {

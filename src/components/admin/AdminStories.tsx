@@ -93,7 +93,8 @@ export default function AdminStories() {
       ) : stories.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center text-muted-foreground">
-            No stories pending moderation. 🎉
+            <PartyPopper className="mx-auto mb-2 h-8 w-8 text-primary" />
+            No stories pending moderation.
           </CardContent>
         </Card>
       ) : (

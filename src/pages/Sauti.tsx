@@ -127,7 +127,16 @@ const Sauti = () => {
       ws.onopen = () => {
         clearTimeout(connectTimeout);
 
-        // Send Gemini Live setup message
+        // Send authentication message for Vertex AI
+        ws.send(
+          JSON.stringify({
+            auth: {
+              access_token: data.accessToken,
+            },
+          })
+        );
+
+        // Send Vertex AI setup message
         ws.send(
           JSON.stringify({
             setup: {

@@ -418,11 +418,15 @@ const Sauti = () => {
             )}
             <span
               className={`relative flex h-16 w-16 items-center justify-center rounded-full ${
-                state === "listening" ? "bg-emergency/20" : "bg-[#C4871A]/15"
+                state === "listening" ? "bg-emergency/20" : 
+                state === "mic-error" ? "bg-emergency/10" :
+                "bg-[#C4871A]/15"
               }`}
             >
               {state === "listening" ? (
                 <MicOff className="h-8 w-8 text-emergency" />
+              ) : state === "mic-error" ? (
+                <MicOff className="h-8 w-8 text-emergency/60" />
               ) : (
                 <Mic className="h-8 w-8" style={{ color: "#C4871A" }} />
               )}

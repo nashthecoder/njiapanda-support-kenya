@@ -30,6 +30,15 @@ const labels: Record<string, Record<Lang, string>> = {
     sw: "Sauti inakusikiliza wakati halisi.\nHakuna rekodi inayohifadhiwa.\nMazungumzo yako yanakusaidia kupata msaada.\nUnaweza kusimama wakati wowote.",
   },
   consentBtn: { en: "I understand — start", sw: "Naelewa — anza" },
+  micError: { 
+    en: "Microphone access is needed to use Sauti", 
+    sw: "Unahitaji ufikiaji wa kipaza sauti kutumia Sauti" 
+  },
+  micErrorBody: {
+    en: "Please allow microphone access in your browser to continue.\nYou may need to click the microphone icon in your address bar.",
+    sw: "Tafadhali ruhusu ufikiaji wa kipaza sauti kwenye kivinjari chako kuendelea.\nHuenda ukahitaji kubonyeza ikoni ya kipaza sauti kwenye upau wa anwani."
+  },
+  tryAgain: { en: "Try again", sw: "Jaribu tena" },
 };
 
 const handleExit = () => {

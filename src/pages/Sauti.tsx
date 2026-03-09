@@ -486,6 +486,17 @@ const Sauti = () => {
             <p className="mt-1 font-sans text-xs text-white/30">{t("tapToEnd")}</p>
           </div>
         )}
+        {state === "mic-error" && (
+          <div className="text-center max-w-xs">
+            <p className="font-display text-sm font-semibold text-emergency mb-2">{t("micError")}</p>
+            <p className="font-sans text-xs text-white/60 whitespace-pre-line leading-relaxed mb-3">
+              {t("micErrorBody")}
+            </p>
+            <p className="font-sans text-xs" style={{ color: "#C4871A" }}>
+              {t("tryAgain")}
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Transcript area */}

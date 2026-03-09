@@ -257,22 +257,30 @@ const Sauti = () => {
 
   const streamAudioToWs = (stream: MediaStream, ws: WebSocket) => {
     const audioContext = new AudioContext({ sampleRate: 16000 });
+    audioContext.resume().catch(() => {});
+
     const source = audioContext.createMediaStreamSource(stream);
     const processor = audioContext.createScriptProcessor(4096, 1, 1);
+
+    // Keep processor alive without echo/feedback
+    const silentGain = audioContext.createGain();
+    silentGain.gain.value = 0;
+
     source.connect(processor);
-    processor.connect(audioContext.destination);
+    processor.connect(silentGain);
+    silentGain.connect(audioContext.destination);
+
     processor.onaudioprocess = (e) => {
-      if (ws.readyState === WebSocket.OPEN) {
-        const pcm = e.inputBuffer.getChannelData(0);
-        const b64 = pcmToBase64(pcm);
-        ws.send(
-          JSON.stringify({
-            realtime_input: {
-              media_chunks: [{ mime_type: "audio/pcm", data: b64 }],
-            },
-          })
-        );
-      }
+      if (ws.readyState !== WebSocket.OPEN) return;
+      const pcm = e.inputBuffer.getChannelData(0);
+      const b64 = pcmToBase64(pcm);
+      ws.send(
+        JSON.stringify({
+          realtime_input: {
+            media_chunks: [{ mime_type: "audio/pcm", data: b64 }],
+          },
+        })
+      );
     };
   };
 

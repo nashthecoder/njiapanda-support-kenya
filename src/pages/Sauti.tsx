@@ -163,7 +163,9 @@ const Sauti = () => {
 
       sessionIdRef.current = data.sessionId;
 
-      const ws = new WebSocket(data.wsUrl);
+      // Pass bearer token as query parameter for Vertex AI WebSocket auth
+      const wsUrlWithAuth = `${data.wsUrl}?access_token=${encodeURIComponent(data.accessToken)}`;
+      const ws = new WebSocket(wsUrlWithAuth);
       wsRef.current = ws;
 
       // Timeout: if WebSocket doesn't open within 10s, reset
@@ -176,15 +178,6 @@ const Sauti = () => {
 
       ws.onopen = () => {
         clearTimeout(connectTimeout);
-
-        // Send authentication message for Vertex AI
-        ws.send(
-          JSON.stringify({
-            auth: {
-              access_token: data.accessToken,
-            },
-          })
-        );
 
         // Send Vertex AI setup message
         ws.send(

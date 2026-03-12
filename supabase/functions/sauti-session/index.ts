@@ -118,7 +118,7 @@ serve(async (req) => {
     const accessToken = tokenJson?.access_token as string | undefined;
     if (!accessToken) throw new Error("Token exchange succeeded but access_token missing");
 
-    const wsUrl = `wss://${location}-aiplatform.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent`;
+    const wsUrl = `wss://${location}-aiplatform.googleapis.com/ws/google.cloud.aiplatform.v1beta1.LlmBidiService/BidiGenerateContent`;
 
     const sessionId = crypto.randomUUID();
     const expiresAt = Date.now() + 5 * 60 * 1000;

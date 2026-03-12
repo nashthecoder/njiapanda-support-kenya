@@ -58,6 +58,9 @@ const Sauti = () => {
   const sessionIdRef = useRef<string>("");
   const audioOutCtxRef = useRef<AudioContext | null>(null);
   const transcriptEndRef = useRef<HTMLDivElement>(null);
+  const processingTimeoutRef = useRef<number | null>(null);
+  const isCompletingRef = useRef(false);
+  const hasMicStartedRef = useRef(false);
 
   useEffect(() => {
     sessionStorage.setItem("sauti-lang", lang);
@@ -70,6 +73,9 @@ const Sauti = () => {
   // Cleanup on unmount
   useEffect(() => {
     return () => {
+      if (processingTimeoutRef.current) {
+        window.clearTimeout(processingTimeoutRef.current);
+      }
       wsRef.current?.close();
       streamRef.current?.getTracks().forEach((t) => t.stop());
       audioOutCtxRef.current?.close().catch(() => {});
@@ -153,8 +159,59 @@ const Sauti = () => {
     return null;
   };
 
+  const completeSession = async (payload: any) => {
+    if (isCompletingRef.current) return;
+    isCompletingRef.current = true;
+
+    if (processingTimeoutRef.current) {
+      window.clearTimeout(processingTimeoutRef.current);
+      processingTimeoutRef.current = null;
+    }
+
+    setState("processing");
+
+    const normalizedPayload = {
+      urgency: payload?.urgency ?? "medium",
+      zone: payload?.zone ?? "unspecified",
+      resource_needed: payload?.resource_needed ?? "general_support",
+    };
+
+    // Emergency: speak hotline number immediately
+    if (normalizedPayload.urgency === "emergency") {
+      const msg = new SpeechSynthesisUtterance(EMERGENCY_MSG[lang]);
+      speechSynthesis.speak(msg);
+    }
+
+    try {
+      await supabase.functions.invoke("sauti-complete", {
+        body: {
+          urgency: normalizedPayload.urgency,
+          zone: normalizedPayload.zone,
+          resource_needed: normalizedPayload.resource_needed,
+          language: lang,
+          sessionId: sessionIdRef.current,
+        },
+      });
+    } catch {
+      // Signal still shown as received for user safety
+    }
+
+    wsRef.current?.close();
+    streamRef.current?.getTracks().forEach((t) => t.stop());
+    hasMicStartedRef.current = false;
+    setState("ended");
+  };
+
   const startSession = async () => {
     setState("connecting");
+    isCompletingRef.current = false;
+    hasMicStartedRef.current = false;
+
+    if (processingTimeoutRef.current) {
+      window.clearTimeout(processingTimeoutRef.current);
+      processingTimeoutRef.current = null;
+    }
+
     try {
       const { data, error } = await supabase.functions.invoke("sauti-session", {
         body: { language: lang },
@@ -169,12 +226,38 @@ const Sauti = () => {
       wsRef.current = ws;
 
       // Timeout: if WebSocket doesn't open within 10s, reset
-      const connectTimeout = setTimeout(() => {
+      const connectTimeout = window.setTimeout(() => {
         if (ws.readyState !== WebSocket.OPEN) {
           ws.close();
           setState("idle");
         }
       }, 10000);
+
+      let setupTimeout: number | null = null;
+      const clearSetupTimeout = () => {
+        if (setupTimeout) {
+          window.clearTimeout(setupTimeout);
+          setupTimeout = null;
+        }
+      };
+
+      const beginMicCapture = () => {
+        if (hasMicStartedRef.current) return;
+        hasMicStartedRef.current = true;
+        clearSetupTimeout();
+
+        navigator.mediaDevices
+          .getUserMedia({ audio: { sampleRate: 16000, channelCount: 1 } })
+          .then((stream) => {
+            streamRef.current = stream;
+            setState("listening");
+            streamAudioToWs(stream, ws);
+          })
+          .catch(() => {
+            setState("mic-error");
+            ws.close();
+          });
+      };
 
       ws.onopen = () => {
         clearTimeout(connectTimeout);
@@ -206,30 +289,37 @@ const Sauti = () => {
           })
         );
 
-        // Request mic after setup sent
-        navigator.mediaDevices
-          .getUserMedia({ audio: { sampleRate: 16000, channelCount: 1 } })
-          .then((stream) => {
-            streamRef.current = stream;
-            setState("listening");
-            streamAudioToWs(stream, ws);
-          })
-          .catch(() => {
-            setState("mic-error");
-            ws.close();
-          });
+        // Wait for setup acknowledgement before starting microphone stream
+        setupTimeout = window.setTimeout(() => {
+          if (!hasMicStartedRef.current) {
+            beginMicCapture();
+          }
+        }, 1500);
       };
 
       ws.onmessage = (event) => {
         try {
           const msg = JSON.parse(event.data);
 
+          if ((msg.setupComplete || msg.setup_complete) && !hasMicStartedRef.current) {
+            beginMicCapture();
+            return;
+          }
+
+          const serverContent = msg.serverContent ?? msg.server_content;
+          const modelTurn = serverContent?.modelTurn ?? serverContent?.model_turn;
+          const parts = modelTurn?.parts ?? [];
+
           // Handle audio and text from model
-          if (msg.serverContent?.modelTurn?.parts) {
-            msg.serverContent.modelTurn.parts.forEach((part: any) => {
-              if (part.inlineData?.mimeType?.includes("audio")) {
-                playAudioChunk(part.inlineData.data, part.inlineData.mimeType);
+          if (parts.length > 0) {
+            parts.forEach((part: any) => {
+              const inlineData = part.inlineData ?? part.inline_data;
+              const mimeType = inlineData?.mimeType ?? inlineData?.mime_type;
+
+              if (mimeType?.includes("audio")) {
+                playAudioChunk(inlineData.data, mimeType);
               }
+
               if (part.text) {
                 setTranscript((prev) => [...prev, { speaker: "Sauti", text: part.text }]);
                 // Check if agent returned signal JSON
@@ -238,19 +328,25 @@ const Sauti = () => {
               }
             });
           }
-
-          // Handle turn completion — agent finished speaking
-          if (msg.serverContent?.turnComplete) {
-            // Agent turn done, user can speak again
-          }
         } catch {
           // Non-JSON message, ignore
         }
       };
 
-      ws.onerror = () => setState("idle");
+      ws.onerror = () => {
+        clearSetupTimeout();
+        setState("idle");
+      };
+
       ws.onclose = () => {
+        clearSetupTimeout();
         streamRef.current?.getTracks().forEach((t) => t.stop());
+        hasMicStartedRef.current = false;
+        setState((current) => {
+          if (current === "processing" && !isCompletingRef.current) return "ended";
+          if (current === "connecting") return "idle";
+          return current;
+        });
       };
     } catch {
       setState("idle");
@@ -279,7 +375,7 @@ const Sauti = () => {
       ws.send(
         JSON.stringify({
           realtime_input: {
-            media_chunks: [{ mime_type: "audio/pcm", data: b64 }],
+            media_chunks: [{ mime_type: "audio/pcm;rate=16000", data: b64 }],
           },
         })
       );
@@ -287,37 +383,34 @@ const Sauti = () => {
   };
 
   const stopSession = () => {
-    wsRef.current?.close();
+    setState("processing");
     streamRef.current?.getTracks().forEach((t) => t.stop());
-    setState("processing");
-  };
-
-  const completeSession = async (payload: any) => {
-    setState("processing");
-
-    // Emergency: speak hotline number immediately
-    if (payload.urgency === "emergency") {
-      const msg = new SpeechSynthesisUtterance(EMERGENCY_MSG[lang]);
-      speechSynthesis.speak(msg);
-    }
 
     try {
-      await supabase.functions.invoke("sauti-complete", {
-        body: {
-          urgency: payload.urgency,
-          zone: payload.zone,
-          resource_needed: payload.resource_needed,
-          language: lang,
-          sessionId: sessionIdRef.current,
-        },
-      });
+      if (wsRef.current?.readyState === WebSocket.OPEN) {
+        wsRef.current.send(
+          JSON.stringify({
+            realtime_input: {
+              audio_stream_end: true,
+            },
+          })
+        );
+      }
     } catch {
-      // Signal still shown as received for user safety
+      // If signaling stop fails, fallback completion timeout below still protects user flow
     }
 
-    wsRef.current?.close();
-    streamRef.current?.getTracks().forEach((t) => t.stop());
-    setState("ended");
+    if (processingTimeoutRef.current) {
+      window.clearTimeout(processingTimeoutRef.current);
+    }
+
+    processingTimeoutRef.current = window.setTimeout(() => {
+      completeSession({
+        urgency: "medium",
+        zone: "unspecified",
+        resource_needed: "general_support",
+      });
+    }, 8000);
   };
 
   return (

@@ -129,7 +129,7 @@ serve(async (req) => {
         accessToken,
         expiresAt,
         sessionId,
-        model: `projects/${projectId}/locations/${location}/models/${model}`,
+        model: `projects/${projectId}/locations/${location}/publishers/google/models/${model}`,
         language,
         zone: zone || "unspecified",
       }),

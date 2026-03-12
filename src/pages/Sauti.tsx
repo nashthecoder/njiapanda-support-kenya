@@ -58,6 +58,9 @@ const Sauti = () => {
   const sessionIdRef = useRef<string>("");
   const audioOutCtxRef = useRef<AudioContext | null>(null);
   const transcriptEndRef = useRef<HTMLDivElement>(null);
+  const processingTimeoutRef = useRef<number | null>(null);
+  const isCompletingRef = useRef(false);
+  const hasMicStartedRef = useRef(false);
 
   useEffect(() => {
     sessionStorage.setItem("sauti-lang", lang);
@@ -70,6 +73,9 @@ const Sauti = () => {
   // Cleanup on unmount
   useEffect(() => {
     return () => {
+      if (processingTimeoutRef.current) {
+        window.clearTimeout(processingTimeoutRef.current);
+      }
       wsRef.current?.close();
       streamRef.current?.getTracks().forEach((t) => t.stop());
       audioOutCtxRef.current?.close().catch(() => {});
